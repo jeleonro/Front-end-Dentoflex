@@ -1,16 +1,21 @@
 .home-content {
-  --background: #f5f7f6;
+  --background: #d3edf1;
   padding: 18px;
   font-family: 'Poppins', sans-serif;
 }
 
 .header {
+  position: sticky;
+  top: 0;
   display: flex;
+  background-color: #fafafa;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding-top: 10px;
+  padding: 15px;
+  opacity: 95%;
 }
+
 
 .logo-section {
   display: flex;
@@ -31,8 +36,12 @@
 
 .notification {
   position: relative;
-  font-size: 24px;
+  border-radius: 100%;
+  display: flex;
+  padding: 5px;
+  font-size: 30px;
   color: #666;
+  border: 2px solid #6FD1D7;
 }
 
 .dot {
@@ -48,15 +57,18 @@
 .greeting h2 {
   font-size: 24px;
   font-weight: 700;
+  padding-left: 16px;
   color: #222;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .card {
   background: #ffffff;
   border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 25px;
+  width: 351px;
+  margin: 0 auto;
+  margin-bottom: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -150,16 +162,15 @@
 
 .bottom-nav {
   --background: white;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  padding: 8px 0;
 }
 
 .bottom-nav ion-button {
   color: #7b7b7b;
-  font-size: 22px;
+  display: block;
+  font-size: 20px;
 }
 
 .bottom-nav ion-button:first-child {
   color: #77c7b5;
+  padding: 10px;
 }

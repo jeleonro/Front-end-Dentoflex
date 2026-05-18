@@ -16,7 +16,7 @@ import {addIcons} from 'ionicons';
 export class MainPage implements OnInit {
 
   constructor() {
-          addIcons({medkit,calendarOutline,medkitOutline,listOutline,chevronForwardOutline,timeOutline,home,settingsOutline,notificationsOutline});}
+          addIcons({calendarOutline,medkitOutline,listOutline,chevronForwardOutline,timeOutline,home,settingsOutline,notificationsOutline});}
 
   ngOnInit() {
   }
