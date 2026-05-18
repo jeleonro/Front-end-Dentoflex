@@ -1,0 +1,219 @@
+@import "@ionic/angular/css/palettes/dark.always.css";
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+ion-content.login-content {
+  --background: #f5f9fb;
+  font-family: Arial, sans-serif;
+  --padding-bottom: 0;
+  --offset-bottom: 0;
+}
+
+ion-content.login-content::part(scroll) {
+  overflow-y: auto;
+}
+
+.page-wrapper {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden; 
+}
+
+
+.container {
+  padding: 30px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.background-shape {
+  position: absolute;
+  background: #8ff5da;
+  opacity: 0.6;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.top-left {
+  width: 220px;
+  height: 220px;
+  top: -80px;
+  left: -80px;
+}
+
+.bottom-right {
+  width: 250px;
+  height: 250px;
+  bottom: -100px;
+  right: -100px;
+}
+
+.logo-section {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.tooth-icon {
+  font-size: 70px;
+}
+
+.logo-text {
+  font-family: "Bungee", sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.dark {
+  color: #17324d;
+}
+
+.green {
+  color: #27c498;
+}
+
+.welcome {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.welcome h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 38px;
+  font-weight: bold;
+  color: #111827;
+}
+
+.welcome p {
+  margin-top: 12px;
+  color: #6b7280;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.input-container {
+  margin-top: 12px;
+  background: white;
+  border-radius: 22px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.input-container ion-icon {
+  font-size: 24px;
+  color: #2751c4;
+}
+
+.input-container ion-input {
+  flex: 1;
+  font-size: 17px;
+  color: black;
+  list-style: none;
+}
+
+.eye {
+  color: black !important;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 14px;
+}
+
+.forgot-password a {
+  color: #272ac4;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.login-btn {
+  margin-top: 15px;
+  --background: #27c498;
+  --border-radius: 20px;
+  height: 45px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.divider {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: black;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.social-card {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.social-card ion-icon {
+  font-size: 34px;
+  color: blue;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 34px;
+  text-align: center;
+  font-size: 17px;
+  color: #374151;
+}
+
+.register ion-button {
+  color: #27c498;
+  font-weight: bold;
+}
+
+.security-card {
+  margin-top: 40px;
+  background: #e9faf4;
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.shield {
+  font-size: 38px;
+}
+
+.security-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #111827;
+}
+
+.security-card p {
+  margin-top: 8px;
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 15px;
+}

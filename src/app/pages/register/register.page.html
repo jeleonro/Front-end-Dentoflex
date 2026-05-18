@@ -1,0 +1,113 @@
+<ion-content [fullscreen]="true" class="register-content">
+
+  <div class="background-shape top-left"></div>
+  <div class="background-shape bottom-right"></div>
+
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo-section">
+      <!-- <div class="tooth-icon"></div>  -->
+      <!-- CAMBIAR ICONO DE LA EMPRESA -->
+
+      <h1 class="logo-text">
+        <span class="dark">Dento </span>
+        <span class="green">Flex</span>
+      </h1>
+    </div>
+
+    <!-- Welcome -->
+    <div class="welcome">
+      <p>
+        Crear Cuenta de Paciente
+      </p>
+    </div>
+
+    <div class="form-registro">
+      <!-- nombres -->
+      <div class="input-container">
+        <ion-icon name="person"></ion-icon>
+        <ion-input placeholder="Nombres" type="text"></ion-input>
+      </div>
+      <!-- apellidos -->
+      <div class="input-container">
+        <ion-icon name="person"></ion-icon>
+        <ion-input placeholder="Apellidos" type="text"></ion-input>
+      </div>
+      <!-- fecha nacimiento -->
+      <div class="input-container" (click)="abrirFecha($event)">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-input value="1999-09-09" type="date" #fechaInput></ion-input>
+      </div>
+
+      <!-- Documento -->
+      <div class="input-container">
+        <ion-icon name="id-card"></ion-icon>
+        <ion-select placeholder="Tipo de Documento">
+          <ion-select-option value="dni">D.N.I</ion-select-option>
+          <ion-select-option value="pasaporte">Pasaporte</ion-select-option>
+          <ion-select-option value="c.e">C.E</ion-select-option>
+        </ion-select>
+        <ion-input type="number"></ion-input>
+      </div>
+
+      <!-- genero -->
+      <div class="input-container">
+        <ion-icon name="male-female"></ion-icon>
+        <div class="contenedor-genero">
+          <span class="genero">Genero</span>
+          <ion-segment value="masculino" class="genero-segment">
+            <ion-segment-button value="masculino">
+              <ion-icon name="male-outline"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="femenino">
+              <ion-icon name="female-outline"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="otro">
+              <ion-label>···</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+      </div>
+    </div>
+
+    <!-- Telefono -->
+    <div class="input-container">
+      <ion-icon name="call"></ion-icon>
+      <ion-input placeholder="999999999" type="telefhone"></ion-input>
+    </div>
+
+    <!-- Gmail -->
+    <div class="input-container">
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-input placeholder="email@email.com" type="mail"></ion-input>
+    </div>
+
+    <!--  Contraseña -->
+    <div class="input-container">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+
+      <ion-input placeholder="Contraseña" type="password"></ion-input>
+
+      <ion-icon class="eye" name="eye-off-outline"></ion-icon>
+    </div>
+
+    <!--  Conmfirmar contraseña -->
+    <div class="input-container">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+
+      <ion-input placeholder="Confirmar Contraseña" type="password"></ion-input>
+
+      <ion-icon class="eye" name="eye-off-outline"></ion-icon>
+    </div>
+
+    <!-- Register -->
+    <div class="register">
+      ¿Ya tienes una cuenta?
+      <ion-button routerLink="/login" fill="clear">
+        Iniciar Sesión
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>

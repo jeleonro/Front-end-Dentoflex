@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+ion-content.login-content {
+    --background: #f5f9fb;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding: 30px 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.background-shape {
+    position: absolute;
+    background: #8ff5da;
+    opacity: 0.6;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.top-left {
+    width: 220px;
+    height: 220px;
+    top: -80px;
+    left: -80px;
+}
+
+.bottom-right {
+    width: 250px;
+    height: 250px;
+    bottom: -100px;
+    right: -100px;
+}
+
+.logo-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.tooth-icon {
+    font-size: 70px;
+}
+
+.logo-text {
+    font-family: "Bungee", sans-serif;
+    font-size: 38px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dark {
+    color: #17324d;
+}
+
+.green {
+    color: #27c498;
+}
+
+.welcome {
+    margin-top: 18px;
+    text-align: start;
+}
+
+.welcome p {
+    margin-top: 12px;
+    color: #6e6d6d;
+    font-size: 18px;
+}
+
+.input-container {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    border-radius: 12px;
+    background: #fff;
+    padding: 4px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    ion-icon {
+        color: #1c29a0; // 
+        font-size: 22px;
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+
+    .contenedor-genero{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .genero-segment {
+        --background: #f0f0f0;
+        border-radius: 8px;
+        height: 48px;
+        width: 60%;
+        text-align: center;
+        
+
+        ion-segment-button {
+            display: flex;
+            --color: #999;
+            --color-checked: #fff;
+            --background-checked: #3a86c8; // 👈 tu color azul/verde
+            --indicator-color: transparent; // quita la línea inferior
+            --border-radius: 6px;
+            min-width: 50px;
+            height: 33px;
+
+            ion-icon {
+                font-size: 20px;
+                margin: 0;
+            }
+        }
+    }
+
+    ion-input {
+        --color: #333;
+        --placeholder-color: #5c5b5b;
+
+        // 👇 Hace que TODO el contenedor sea clickeable
+        input[type="date"] {
+            width: 100%;
+            min-width: 100%;
+            cursor: pointer;
+
+            // Oculta el ícono nativo del browser
+            &::-webkit-calendar-picker-indicator {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0; // invisible pero funcional en toda el área
+                cursor: pointer;
+            }
+        }
+    }
+
+    ion-select {
+        width: 120px;
+    }
+}
+
+.input-container span {
+    color: #333;
+    justify-content: center;
+}
+
+.eye {
+    color: black !important;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 14px;
+}
+
+.forgot-password a {
+    color: #272ac4;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.login-btn {
+    margin-top: 28px;
+    --background: #27c498;
+    --border-radius: 20px;
+    height: 58px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.divider {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #6b7280;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background: black;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.social-card {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.social-card ion-icon {
+    font-size: 34px;
+    color: #111827;
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin-top: 34px;
+    text-align: center;
+    font-size: 13px;
+    color: #374151;
+}
+
+.register ion-button {
+    color: #27c498;
+    font-weight: bold;
+}

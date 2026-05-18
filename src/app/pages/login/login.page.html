@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true" class="login-content">
+
+  <div class="page-wrapper">
+    <div class="background-shape top-left"></div>
+    <div class="background-shape bottom-right"></div>
+
+    <div class="container">
+
+      <!-- Logo -->
+      <div class="logo-section">
+        <!-- <div class="tooth-icon">🦷</div>  -->
+        <!-- CAMBIAR ICONO DE LA EMPRESA -->
+
+        <h1 class="logo-text">
+          <span class="dark">Dento </span>
+          <span class="green">Flex</span>
+        </h1>
+      </div>
+
+      <!-- Welcome -->
+      <div class="welcome">
+        <h2>¡Bienvenido!</h2>
+        <p>
+          Inicia sesión para continuar<br />
+          cuidando tu salud dental.
+        </p>
+      </div>
+
+      <!-- Email -->
+      <div class="input-container">
+        <ion-icon name="mail-outline"></ion-icon>
+
+        <ion-input placeholder="Correo electrónico" type="email"></ion-input>
+      </div>
+
+      <!-- Password -->
+      <div class="input-container">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+
+        <ion-input placeholder="Contraseña" type="password"></ion-input>
+
+        <ion-icon class="eye" name="eye-off-outline"></ion-icon>
+      </div>
+
+      <!-- Forgot -->
+      <div class="forgot-password">
+        <a href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <!-- Login Button -->
+      <ion-button expand="block" class="login-btn">
+        Iniciar sesión
+      </ion-button>
+
+      <!-- Divider -->
+      <div class="divider">
+        <div class="line"></div>
+        <span>o continúa con</span>
+        <div class="line"></div>
+      </div>
+
+      <!-- Social -->
+      <div class="social-buttons">
+        <div class="social-card">
+          <ion-icon name="logo-google"></ion-icon>
+        </div>
+
+      </div>
+
+      <!-- Register -->
+      <div class="register">
+        ¿No tienes una cuenta?
+        <ion-button routerLink="/register" fill="clear">
+          Regístrate
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>
