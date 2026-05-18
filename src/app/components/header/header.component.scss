@@ -1,0 +1,54 @@
+.header-container {
+  padding: 16px;
+  background: #dff3f8;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  img {
+    width: 28px;
+    height: 28px;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f8f72;
+  }
+}
+
+.notification {
+  position: relative;
+
+  ion-icon {
+    font-size: 24px;
+    color: #333;
+  }
+
+  ion-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+    border-radius: 50%;
+  }
+}
+
+.greeting {
+  margin-top: 12px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+}

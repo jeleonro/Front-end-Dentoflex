@@ -9,7 +9,7 @@ import {
   eyeOffOutline,
   logoGoogle, idCard, idCardOutline, idCardSharp, female, maleFemale, male, maleOutline, femaleOutline, cellular, call } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { IonContent, IonLabel, IonSegment, IonButton, IonSegmentButton, IonInput, IonIcon, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
+import { IonContent, IonLabel, IonSegment, IonButton, IonSegmentButton, IonInput, IonIcon, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 
 import { RouterModule } from '@angular/router';
 
@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonContent, IonLabel, IonButton, IonSegment, IonSegmentButton, IonInput, IonIcon, CommonModule, FormsModule, IonItem, IonList, IonSelect, IonSelectOption,  RouterModule]
+  imports: [IonContent, IonLabel, IonButton, IonSegment, IonSegmentButton, IonInput, IonIcon, CommonModule, FormsModule, IonSelect, IonSelectOption,  RouterModule]
 })
 export class RegisterPage implements OnInit {
   @ViewChild('fechaInput', { read: ElementRef }) fechaInput!: ElementRef;
