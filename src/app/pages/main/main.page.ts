@@ -5,13 +5,14 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonFooter, IonBut
 import { medkitOutline, notificationsOutline, calendarOutline, listOutline, chevronForwardOutline, timeOutline, home, settingsOutline } from 'ionicons/icons';
 import {addIcons} from 'ionicons';
 
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonIcon, IonFooter, IonButton, IonButtons]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonIcon, IonFooter, IonButton, IonButtons, RouterModule]
 })
 export class MainPage implements OnInit {
 

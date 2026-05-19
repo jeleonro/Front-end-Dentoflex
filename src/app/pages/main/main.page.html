@@ -1,85 +1,93 @@
-<ion-content [fullscreen]="true" class="home-content">
+<ion-content class="home-content">
+
   <!-- Header -->
   <div class="header">
-      <div class="logo-section">
-        <ion-icon name="medkit-outline" class="logo-icon"></ion-icon>
-        <span class="logo-text">DentoFlex</span>
+
+    <div class="logo-section">
+      <ion-icon name="medkit-outline" class="logo-icon"></ion-icon>
+      <h1 class="logo-text">
+        <span class="dark">Dento </span>
+        <span class="green">Flex</span>
+      </h1>
     </div>
 
+    <ion-button class="notification-btn">
       <div class="notification">
         <ion-icon name="notifications-outline"></ion-icon>
         <span class="dot"></span>
       </div>
+    </ion-button>
+
   </div>
 
-    <!-- Greeting -->
-    <div class="greeting">
-      <h2>Hola, Paciente</h2>
+  <!-- Greeting -->
+  <div class="greeting">
+    <h2>Hola, Paciente</h2>
+  </div>
+
+  <!-- Próxima cita -->
+  <div class="card appointment">
+    <div class="card-header">
+      <h3>Próxima Cita:</h3>
+      <ion-icon name="calendar-outline"></ion-icon>
     </div>
 
-    <!-- Próxima cita -->
-    <div class="card appointment">
-      <div class="card-header">
-        <h3>Próxima Cita:</h3>
-        <ion-icon name="calendar-outline"></ion-icon>
+    <div class="appointment-box">
+      <div class="appointment-icon">
+        <ion-icon name="medkit-outline"></ion-icon>
       </div>
 
-      <div class="appointment-box">
-        <div class="appointment-icon">
-          <ion-icon name="medkit-outline"></ion-icon>
-        </div>
-
-        <div class="appointment-info">
-          <h4>Limpieza dental con</h4>
-          <p>Dr. Mary Novincolqui</p>
-          <small>Martes, 18 de Junio, 10:00 AM</small>
-        </div>
+      <div class="appointment-info">
+        <h4>Limpieza dental con</h4>
+        <p>Dr. Mary Novincolqui</p>
+        <small>Martes, 18 de Junio, 10:00 AM</small>
       </div>
     </div>
+  </div>
 
-    <!-- Historial -->
-    <div class="card">
-      <div class="card-header">
-        <h3>Historial de Citas</h3>
-        <ion-icon name="list-outline"></ion-icon>
-      </div>
-
-      <div class="history-item">
-        <div>
-          <h4>Limpieza dental</h4>
-          <p>Dr. Mary Novincolqui</p>
-        </div>
-        <ion-icon name="chevron-forward-outline"></ion-icon>
-      </div>
-
-      <div class="history-item">
-        <div>
-          <h4>Historial de Citas</h4>
-          <p>Dra. Mary Novincolqui</p>
-        </div>
-        <ion-icon name="chevron-forward-outline"></ion-icon>
-      </div>
+  <!-- Historial -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Historial de Citas</h3>
+      <ion-icon name="list-outline"></ion-icon>
     </div>
 
-    <!-- Tratamientos -->
-    <div class="card">
-      <div class="card-header">
-        <h3>Tratamientos Activos</h3>
-        <ion-icon name="time-outline"></ion-icon>
+    <div class="history-item">
+      <div>
+        <h4>Limpieza dental</h4>
+        <p>Dr. Mary Novincolqui</p>
       </div>
-
-      <p class="treatment-text">
-        Overiniente en avris, precisan na dental sonieontal.
-      </p>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
     </div>
+
+    <div class="history-item">
+      <div>
+        <h4>Historial de Citas</h4>
+        <p>Dra. Mary Novincolqui</p>
+      </div>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Tratamientos -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Tratamientos Activos</h3>
+      <ion-icon name="time-outline"></ion-icon>
+    </div>
+
+    <p class="treatment-text">
+      Overiniente en avris, precisan na dental sonieontal.
+    </p>
+  </div>
 </ion-content>
 
 <ion-footer>
-
   <ion-toolbar class="bottom-nav">
+
     <ion-buttons slot="start">
 
-      <ion-button>
+      <ion-button routerLink="/main" fill="clear">
         <ion-icon name="home"></ion-icon>
       </ion-button>
 
@@ -94,6 +102,8 @@
       <ion-button>
         <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
-    </ion-buttons slot="end"
+
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-footer>
