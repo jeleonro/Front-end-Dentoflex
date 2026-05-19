@@ -11,12 +11,14 @@ import {
   downloadOutline
 } from 'ionicons/icons';
 
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+
 @Component({
   selector: 'app-profile-user',
   templateUrl: './profile-user.page.html',
   styleUrls: ['./profile-user.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonIcon, IonButton, IonButtons]
+  imports: [IonContent, IonHeader,FooterComponent, IonTitle, IonToolbar, CommonModule, FormsModule, IonIcon, IonButton, IonButtons]
 })
 export class ProfileUserPage implements OnInit {
 
