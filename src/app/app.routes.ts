@@ -18,6 +18,14 @@ export const routes: Routes = [
     path: 'main',
     loadComponent: () => import('./pages/main/main.page').then( m => m.MainPage)
   },
+  {
+    path: 'cita',
+    loadComponent: () => import('./pages/cita/cita.page').then( m => m.CitaPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile-user/profile-user.page').then( m => m.ProfileUserPage)
+  }
 
 
 ];
