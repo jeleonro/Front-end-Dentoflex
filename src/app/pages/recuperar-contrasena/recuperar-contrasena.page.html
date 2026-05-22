@@ -1,0 +1,49 @@
+
+  <ion-toolbar class="toolbar-custom">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+<ion-content fullscreen class="recuperar-content">
+
+  <div class="top-wave"></div>
+
+  <div class="container">
+
+    <div class="logo-card">
+      <div class="icon-circle">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </div>
+
+      <h1>¿Olvidaste tu contraseña?</h1>
+
+      <p>
+        Ingresa tu correo electrónico y te enviaremos un enlace para recuperar tu cuenta.
+      </p>
+    </div>
+
+    <div class="form-card">
+
+      <ion-item lines="none" class="input-custom">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input
+          type="email"
+          placeholder="Correo electrónico">
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" class="btn-recuperar">
+        Enviar enlace
+      </ion-button>
+
+      <div class="volver-login">
+        <span>¿Recordaste tu contraseña?</span>
+        <a routerLink="/login"> Iniciar sesión </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

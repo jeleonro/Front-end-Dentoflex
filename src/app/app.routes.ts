@@ -29,5 +29,9 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./pages/profile-user/profile-user.page').then(m => m.ProfileUserPage),
     canActivate: [authGuard],
+  },  {
+    path: 'recuperar-contrasena',
+    loadComponent: () => import('./pages/recuperar-contrasena/recuperar-contrasena.page').then( m => m.RecuperarContrasenaPage)
   },
+
 ];
