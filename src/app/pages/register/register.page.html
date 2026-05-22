@@ -7,56 +7,52 @@
 
     <!-- Logo -->
     <div class="logo-section">
-      <!-- <div class="tooth-icon"></div>  -->
-      <!-- CAMBIAR ICONO DE LA EMPRESA -->
-
       <h1 class="logo-text">
-        <span class="dark">Dento </span>
-        <span class="green">Flex</span>
+        <span class="dark">Dento </span><span class="green">Flex</span>
       </h1>
     </div>
 
-    <!-- Welcome -->
     <div class="welcome">
-      <p>
-        Crear Cuenta de Paciente
-      </p>
+      <p>Crear Cuenta de Paciente</p>
     </div>
 
     <div class="form-registro">
-      <!-- nombres -->
+
+      <!-- Nombres -->
       <div class="input-container">
         <ion-icon name="person"></ion-icon>
-        <ion-input placeholder="Nombres" type="text"></ion-input>
+        <ion-input placeholder="Nombres" type="text" [(ngModel)]="nombres" [disabled]="loading"></ion-input>
       </div>
-      <!-- apellidos -->
+
+      <!-- Apellidos -->
       <div class="input-container">
         <ion-icon name="person"></ion-icon>
-        <ion-input placeholder="Apellidos" type="text"></ion-input>
+        <ion-input placeholder="Apellidos" type="text" [(ngModel)]="apellidos" [disabled]="loading"></ion-input>
       </div>
-      <!-- fecha nacimiento -->
+
+      <!-- Fecha nacimiento -->
       <div class="input-container" (click)="abrirFecha($event)">
         <ion-icon name="calendar"></ion-icon>
-        <ion-input value="1999-09-09" type="date" #fechaInput></ion-input>
+        <ion-input [(ngModel)]="fechaNacimiento" type="date" #fechaInput [disabled]="loading"></ion-input>
       </div>
 
       <!-- Documento -->
       <div class="input-container">
-        <ion-icon name="id-card"></ion-icon>
-        <ion-select placeholder="Tipo de Documento">
+        <ion-icon name="id-card-outline"></ion-icon>
+        <ion-select placeholder="Tipo de Documento" [(ngModel)]="tipoDocumento" [disabled]="loading">
           <ion-select-option value="dni">D.N.I</ion-select-option>
           <ion-select-option value="pasaporte">Pasaporte</ion-select-option>
           <ion-select-option value="c.e">C.E</ion-select-option>
         </ion-select>
-        <ion-input type="number"></ion-input>
+        <ion-input type="number" placeholder="Número" [(ngModel)]="numeroDocumento" [disabled]="loading"></ion-input>
       </div>
 
-      <!-- genero -->
+      <!-- Género -->
       <div class="input-container">
         <ion-icon name="male-female"></ion-icon>
         <div class="contenedor-genero">
-          <span class="genero">Genero</span>
-          <ion-segment value="masculino" class="genero-segment">
+          <span class="genero">Género</span>
+          <ion-segment [value]="genero" class="genero-segment" (ionChange)="cambiarGenero($any($event))">
             <ion-segment-button value="masculino">
               <ion-icon name="male-outline"></ion-icon>
             </ion-segment-button>
@@ -69,45 +65,46 @@
           </ion-segment>
         </div>
       </div>
+
     </div>
 
-    <!-- Telefono -->
+    <!-- Teléfono -->
     <div class="input-container">
       <ion-icon name="call"></ion-icon>
-      <ion-input placeholder="999999999" type="telefhone"></ion-input>
+      <ion-input placeholder="999999999" type="tel" [(ngModel)]="telefono" [disabled]="loading"></ion-input>
     </div>
 
-    <!-- Gmail -->
+    <!-- Email -->
     <div class="input-container">
       <ion-icon name="mail-outline"></ion-icon>
-      <ion-input placeholder="email@email.com" type="mail"></ion-input>
+      <ion-input placeholder="email@email.com" type="email" [(ngModel)]="email" [disabled]="loading"></ion-input>
     </div>
 
-    <!--  Contraseña -->
+    <!-- Contraseña -->
     <div class="input-container">
       <ion-icon name="lock-closed-outline"></ion-icon>
-
-      <ion-input placeholder="Contraseña" type="password"></ion-input>
-
-      <ion-icon class="eye" name="eye-off-outline"></ion-icon>
+      <ion-input placeholder="Contraseña" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" [disabled]="loading"></ion-input>
+      <ion-icon class="eye" [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" (click)="togglePassword()"></ion-icon>
     </div>
 
-    <!--  Conmfirmar contraseña -->
+    <!-- Confirmar Contraseña -->
     <div class="input-container">
       <ion-icon name="lock-closed-outline"></ion-icon>
-
-      <ion-input placeholder="Confirmar Contraseña" type="password"></ion-input>
-
-      <ion-icon class="eye" name="eye-off-outline"></ion-icon>
+      <ion-input placeholder="Confirmar Contraseña" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" [disabled]="loading"></ion-input>
     </div>
 
-    <!-- Register -->
+    <!-- Botón Registrar -->
+    <ion-button expand="block" class="login-btn" (click)="onRegister()" [disabled]="loading">
+      <ion-spinner *ngIf="loading" name="crescent" style="margin-right:8px"></ion-spinner>
+      {{ loading ? 'Registrando...' : 'Crear Cuenta' }}
+    </ion-button>
+
+    <!-- Link Login -->
     <div class="register">
       ¿Ya tienes una cuenta?
-      <ion-button routerLink="/login" fill="clear">
-        Iniciar Sesión
-      </ion-button>
+      <ion-button routerLink="/login" fill="clear">Iniciar Sesión</ion-button>
     </div>
+
   </div>
 
 </ion-content>

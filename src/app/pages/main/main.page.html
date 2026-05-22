@@ -2,95 +2,75 @@
 
 <ion-content class="home-content">
 
-  <!-- Header -->
-  
-
-  <!-- Greeting -->
+  <!-- Saludo -->
   <div class="greeting">
-    <h2>Hola, Paciente</h2>
+    <h2>Hola, {{ auth.currentUser()?.nombres || 'Paciente' }}</h2>
   </div>
 
-  <!-- Próxima cita -->
-  <div class="card appointment">
-    <div class="card-header">
-      <h3>Próxima Cita:</h3>
-      <ion-icon name="calendar-outline"></ion-icon>
-    </div>
-
-    <div class="appointment-box">
-      <div class="appointment-icon">
-        <ion-icon name="medkit-outline"></ion-icon>
-      </div>
-
-      <div class="appointment-info">
-        <h4>Limpieza dental con</h4>
-        <p>Dr. Mary Novincolqui</p>
-        <small>Martes, 18 de Junio, 10:00 AM</small>
-      </div>
-    </div>
+  <!-- Spinner de carga -->
+  <div *ngIf="loading" style="text-align:center; padding:32px">
+    <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-  <!-- Historial -->
-  <div class="card">
-    <div class="card-header">
-      <h3>Historial de Citas</h3>
-      <ion-icon name="list-outline"></ion-icon>
-    </div>
+  <ng-container *ngIf="!loading">
 
-    <div class="history-item">
-      <div>
-        <h4>Limpieza dental</h4>
-        <p>Dr. Mary Novincolqui</p>
+    <!-- Próxima cita -->
+    <div class="card appointment">
+      <div class="card-header">
+        <h3>Próxima Cita:</h3>
+        <ion-icon name="calendar-outline"></ion-icon>
       </div>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
-    </div>
 
-    <div class="history-item">
-      <div>
-        <h4>Historial de Citas</h4>
-        <p>Dra. Mary Novincolqui</p>
+      <div class="appointment-box" *ngIf="proximaCita; else sinCita">
+        <div class="appointment-icon">
+          <ion-icon name="medkit-outline"></ion-icon>
+        </div>
+        <div class="appointment-info">
+          <h4>{{ proximaCita.dentistas?.especialidad || 'Consulta dental' }}</h4>
+          <p>{{ proximaCita.dentistas?.nombres }} {{ proximaCita.dentistas?.apellidos }}</p>
+          <small>{{ proximaCita.fecha | date:'EEEE, dd MMMM':'':'es' }} · {{ proximaCita.hora }}</small>
+        </div>
       </div>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
-    </div>
-  </div>
 
-  <!-- Tratamientos -->
-  <div class="card">
-    <div class="card-header">
-      <h3>Tratamientos Activos</h3>
-      <ion-icon name="time-outline"></ion-icon>
+      <ng-template #sinCita>
+        <div class="appointment-box" style="flex-direction:column; align-items:center; gap:8px; padding:16px 0">
+          <p style="color:var(--ion-color-medium)">No tienes citas próximas</p>
+          <ion-button fill="outline" size="small" (click)="irACitas()">Agendar ahora</ion-button>
+        </div>
+      </ng-template>
     </div>
 
-    <p class="treatment-text">
-      Overiniente en avris, precisan na dental sonieontal.
-    </p>
-  </div>
+    <!-- Historial de Citas -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Historial de Citas</h3>
+        <ion-icon name="list-outline"></ion-icon>
+      </div>
+
+      <div *ngIf="historialCitas.length === 0" style="padding:12px 0; color:var(--ion-color-medium)">
+        Sin historial aún.
+      </div>
+
+      <div class="history-item" *ngFor="let cita of historialCitas">
+        <div>
+          <h4>{{ cita.dentistas?.especialidad || 'Consulta' }}</h4>
+          <p>{{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}</p>
+          <small>{{ cita.fecha | date:'dd/MM/yyyy' }} · <span [style.color]="cita.estado === 'cancelada' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)'">{{ cita.estado }}</span></small>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Botón ir a citas -->
+    <div class="card" style="text-align:center">
+      <ion-button expand="block" fill="outline" routerLink="/cita">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        Nueva Cita
+      </ion-button>
+    </div>
+
+  </ng-container>
 
 </ion-content>
 
 <app-footer></app-footer>
-<!-- <ion-footer>
-  <ion-toolbar class="bottom-nav">
-
-    <ion-buttons slot="start">
-
-      <ion-button routerLink="/main" fill="clear">
-        <ion-icon name="home"></ion-icon>
-      </ion-button>
-
-      <ion-button>
-        <ion-icon name="calendar-outline"></ion-icon>
-      </ion-button>
-
-      <ion-button>
-        <ion-icon name="time-outline"></ion-icon>
-      </ion-button>
-
-      <ion-button>
-        <ion-icon name="settings-outline"></ion-icon>
-      </ion-button>
-
-    </ion-buttons>
-
-  </ion-toolbar>
-</ion-footer> -->

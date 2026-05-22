@@ -8,9 +8,6 @@
 
       <!-- Logo -->
       <div class="logo-section">
-        <!-- <div class="tooth-icon">🦷</div>  -->
-        <!-- CAMBIAR ICONO DE LA EMPRESA -->
-
         <h1 class="logo-text">
           <span class="dark">Dento </span>
           <span class="green">Flex</span>
@@ -20,36 +17,40 @@
       <!-- Welcome -->
       <div class="welcome">
         <h2>¡Bienvenido!</h2>
-        <p>
-          Inicia sesión para continuar<br />
-          cuidando tu salud dental.
-        </p>
+        <p>Inicia sesión para continuar<br />cuidando tu salud dental.</p>
       </div>
 
       <!-- Email -->
       <div class="input-container">
         <ion-icon name="mail-outline"></ion-icon>
-
-        <ion-input placeholder="Correo electrónico" type="email"></ion-input>
+        <ion-input
+          placeholder="Correo electrónico"
+          type="email"
+          [(ngModel)]="email"
+          [disabled]="loading">
+        </ion-input>
       </div>
 
       <!-- Password -->
       <div class="input-container">
         <ion-icon name="lock-closed-outline"></ion-icon>
-
-        <ion-input placeholder="Contraseña" type="password"></ion-input>
-
-        <ion-icon class="eye" name="eye-off-outline"></ion-icon>
-      </div>
-
-      <!-- Forgot -->
-      <div class="forgot-password">
-        <a href="#">¿Olvidaste tu contraseña?</a>
+        <ion-input
+          placeholder="Contraseña"
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          [disabled]="loading">
+        </ion-input>
+        <ion-icon
+          class="eye"
+          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+          (click)="togglePassword()">
+        </ion-icon>
       </div>
 
       <!-- Login Button -->
-      <ion-button expand="block" class="login-btn" routerLink="/main">
-        Iniciar sesión
+      <ion-button expand="block" class="login-btn" (click)="onLogin()" [disabled]="loading">
+        <ion-spinner *ngIf="loading" name="crescent" style="margin-right:8px"></ion-spinner>
+        {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
       </ion-button>
 
       <!-- Divider -->
@@ -64,18 +65,15 @@
         <div class="social-card">
           <ion-icon name="logo-google"></ion-icon>
         </div>
-
       </div>
 
       <!-- Register -->
       <div class="register">
         ¿No tienes una cuenta?
-        <ion-button routerLink="/register" fill="clear">
-          Regístrate
-        </ion-button>
+        <ion-button routerLink="/register" fill="clear">Regístrate</ion-button>
       </div>
+
     </div>
   </div>
-
 
 </ion-content>

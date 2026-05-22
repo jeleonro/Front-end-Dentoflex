@@ -1,31 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  mailOutline,
-  lockClosedOutline,
-  eyeOffOutline,
-  logoGoogle,
-  logoFacebook,
-  logoApple, medkitOutline, notificationsOutline, calendarOutline, listOutline, chevronForwardOutline, timeOutline, home, settingsOutline } from 'ionicons/icons';
-import {addIcons} from 'ionicons';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonIcon } from '@ionic/angular/standalone';
-
 import { Router, RouterModule } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { mailOutline, lockClosedOutline, eyeOffOutline, eyeOutline, logoGoogle } from 'ionicons/icons';
+import {
+  IonContent, IonButton, IonInput, IonIcon,
+  IonSpinner, ToastController
+} from '@ionic/angular/standalone';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule, IonButton, IonInput, IonIcon ,RouterModule]
+  imports: [IonContent, CommonModule, FormsModule, IonButton, IonInput, IonIcon, IonSpinner, RouterModule],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  email = '';
+  password = '';
+  showPassword = false;
+  loading = false;
 
-  constructor() {
-      addIcons({medkitOutline,notificationsOutline,calendarOutline,listOutline,chevronForwardOutline,timeOutline,home,settingsOutline,mailOutline,lockClosedOutline,eyeOffOutline,logoGoogle}); }
-
-  ngOnInit() {
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toast: ToastController
+  ) {
+    addIcons({ mailOutline, lockClosedOutline, eyeOffOutline, eyeOutline, logoGoogle });
   }
 
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  async onLogin() {
+    if (!this.email || !this.password) {
+      this.showToast('Completa todos los campos', 'warning');
+      return;
+    }
+
+    this.loading = true;
+
+    this.auth.login(this.email, this.password).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigateByUrl('/main');
+      },
+      error: (err) => {
+        this.loading = false;
+        const msg = err.error?.error ?? 'Error al iniciar sesión';
+        this.showToast(msg, 'danger');
+      },
+    });
+  }
+
+  private async showToast(message: string, color: 'danger' | 'warning' | 'success') {
+    const t = await this.toast.create({ message, duration: 3000, color, position: 'top' });
+    t.present();
+  }
 }
