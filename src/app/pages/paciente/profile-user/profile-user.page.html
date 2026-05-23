@@ -1,0 +1,170 @@
+<ion-content class="perfil-content">
+
+  <!-- ── Header con foto ── -->
+  <div class="perfil-hero">
+
+    <div class="foto-wrapper" (click)="seleccionarFoto()">
+      <img
+        [src]="auth.currentUser()?.foto_url || 'assets/icon/favicon.png'"
+        alt="Foto de perfil"
+        class="foto-perfil">
+      <div class="foto-overlay">
+        <ion-spinner *ngIf="uploadingFoto" name="crescent"></ion-spinner>
+        <ion-icon *ngIf="!uploadingFoto" name="camera-outline"></ion-icon>
+      </div>
+    </div>
+
+    <div class="hero-info">
+      <h2>{{ auth.currentUser()?.nombres }} {{ auth.currentUser()?.apellidos }}</h2>
+      <p class="hero-email">{{ auth.currentUser()?.email }}</p>
+    </div>
+
+    <!-- Stats rápidas -->
+    <div class="stats-row">
+      <div class="stat">
+        <span class="stat-num">{{ totalCitas }}</span>
+        <span class="stat-label">Citas totales</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">{{ citasCompletadas }}</span>
+        <span class="stat-label">Completadas</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Datos no editables ── -->
+  <div class="section-card">
+    <h3 class="section-title">Información Personal</h3>
+
+    <div class="dato-row">
+      <ion-icon name="id-card-outline"></ion-icon>
+      <div>
+        <span class="dato-label">Documento</span>
+        <span class="dato-valor">
+          {{ auth.currentUser()?.tipo_documento?.toUpperCase() }}
+          {{ auth.currentUser()?.numero_documento }}
+        </span>
+      </div>
+    </div>
+
+    <div class="dato-row">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <div>
+        <span class="dato-label">Fecha de nacimiento</span>
+        <span class="dato-valor">
+          {{ auth.currentUser()?.fecha_nacimiento | date:'dd/MM/yyyy' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="dato-row">
+      <ion-icon name="male-female-outline"></ion-icon>
+      <div>
+        <span class="dato-label">Género</span>
+        <span class="dato-valor" style="text-transform: capitalize">
+          {{ auth.currentUser()?.genero }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Datos editables ── -->
+  <div class="section-card">
+    <div class="section-header">
+      <h3 class="section-title">Contacto</h3>
+      <ion-button fill="clear" size="small" (click)="toggleEdit()">
+        <ion-icon slot="icon-only" [name]="editMode ? 'close-outline' : 'create-outline'"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Modo lectura -->
+    <ng-container *ngIf="!editMode">
+      <div class="dato-row">
+        <ion-icon name="call-outline"></ion-icon>
+        <div>
+          <span class="dato-label">Teléfono</span>
+          <span class="dato-valor">{{ auth.currentUser()?.telefono }}</span>
+        </div>
+      </div>
+      <div class="dato-row">
+        <ion-icon name="mail-outline"></ion-icon>
+        <div>
+          <span class="dato-label">Correo</span>
+          <span class="dato-valor">{{ auth.currentUser()?.email }}</span>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Modo edición -->
+    <ng-container *ngIf="editMode">
+      <div class="input-edit">
+        <ion-icon name="call-outline"></ion-icon>
+        <ion-input
+          [(ngModel)]="telefono"
+          type="tel"
+          placeholder="Teléfono"
+          [disabled]="loading">
+        </ion-input>
+      </div>
+      <div class="input-edit">
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-input
+          [(ngModel)]="email"
+          type="ema"
+          placeholder="email"
+          [disabled]="loading">
+        </ion-input>
+      </div>
+      <div class="edit-actions">
+        <ion-button expand="block" (click)="guardarCambios()" [disabled]="loading">
+          <ion-spinner *ngIf="loading" name="crescent" style="margin-right:6px"></ion-spinner>
+          {{ loading ? 'Guardando...' : 'Guardar cambios' }}
+        </ion-button>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- ── Historial clínico (citas completadas) ── -->
+  <div class="section-card" *ngIf="citasCompletadas > 0">
+    <div class="section-header">
+      <h3 class="section-title">Historial Clínico</h3>
+      <ion-icon name="clipboard-outline"></ion-icon>
+    </div>
+
+    <div
+      class="historial-card"
+      *ngFor="let cita of citaService.misCitas() | slice:0:5">
+      <ng-container *ngIf="cita.estado === 'completada'">
+        <div class="fila">
+          <strong>Fecha</strong>
+          <span>{{ cita.fecha | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="fila">
+          <strong>Dentista</strong>
+          <span>{{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}</span>
+        </div>
+        <div class="fila">
+          <strong>Especialidad</strong>
+          <span>{{ cita.dentistas?.especialidad }}</span>
+        </div>
+        <div class="fila" *ngIf="cita.notas">
+          <strong>Notas</strong>
+          <span>{{ cita.notas }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- ── Cerrar sesión ── -->
+  <div class="logout-section">
+    <ion-button expand="block" fill="outline" color="danger" (click)="confirmarLogout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<app-footer></app-footer>

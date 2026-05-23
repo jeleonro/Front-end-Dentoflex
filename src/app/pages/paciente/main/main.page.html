@@ -1,0 +1,100 @@
+<app-header></app-header>
+
+<ion-content class="home-content">
+
+  <!-- Saludo -->
+  <div class="greeting">
+    <h2>Hola, {{ auth.currentUser()?.nombres || 'Paciente' }} 👋</h2>
+    <p>¿Cómo está tu salud dental hoy?</p>
+  </div>
+
+  <!-- Cargando -->
+  <div *ngIf="loading" class="loading-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <ng-container *ngIf="!loading">
+
+    <!-- ── Próxima Cita ── -->
+    <div class="card appointment">
+      <div class="card-header">
+        <h3>Próxima Cita</h3>
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+
+      <!-- Con cita -->
+      <ng-container *ngIf="proximaCita; else sinCita">
+        <div class="appointment-box">
+          <div class="appointment-icon">
+            <ion-icon name="medkit-outline"></ion-icon>
+          </div>
+          <div class="appointment-info">
+            <h4>{{ proximaCita.dentistas?.especialidad || 'Consulta dental' }}</h4>
+            <p>{{ proximaCita.dentistas?.nombres }} {{ proximaCita.dentistas?.apellidos }}</p>
+            <small>
+              {{ proximaCita.fecha | date:'EEEE, dd MMMM' }} · {{ proximaCita.hora }}
+            </small>
+            <div class="estado-badge" [style.color]="estadoColor(proximaCita.estado)">
+              ● {{ proximaCita.estado | titlecase }}
+            </div>
+          </div>
+          <!-- Botón cancelar -->
+          <ion-button
+            fill="clear"
+            color="danger"
+            size="small"
+            class="btn-cancelar"
+            (click)="confirmarCancelacion(proximaCita)">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ng-container>
+
+      <!-- Sin cita -->
+      <ng-template #sinCita>
+        <div class="empty-cita">
+          <p>No tienes citas próximas</p>
+          <ion-button fill="outline" size="small" routerLink="/cita">
+            Agendar ahora
+          </ion-button>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- ── Historial ── -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Historial de Citas</h3>
+        <ion-icon name="list-outline"></ion-icon>
+      </div>
+
+      <div *ngIf="historialCitas.length === 0" class="empty-historial">
+        Sin historial aún.
+      </div>
+
+      <div class="history-item" *ngFor="let cita of historialCitas">
+        <div class="history-info">
+          <h4>{{ cita.dentistas?.especialidad || 'Consulta' }}</h4>
+          <p>{{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}</p>
+          <small>
+            {{ cita.fecha | date:'dd/MM/yyyy' }} · {{ cita.hora }}
+            · <span [style.color]="estadoColor(cita.estado)">{{ cita.estado | titlecase }}</span>
+          </small>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- ── Nueva Cita ── -->
+    <div style="padding: 0 16px 24px">
+      <ion-button expand="block" fill="outline" routerLink="/cita">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        Nueva Cita
+      </ion-button>
+    </div>
+
+  </ng-container>
+
+</ion-content>
+
+<app-footer></app-footer>

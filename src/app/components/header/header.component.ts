@@ -14,8 +14,6 @@ import {
 })
 export class HeaderComponent  implements OnInit {
 
-  // @Input() patientName: string = 'Paciente';
-
   constructor() { 
     
   }

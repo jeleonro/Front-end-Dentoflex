@@ -1,0 +1,221 @@
+ion-content {
+  --background: #dff3f8;
+}
+
+.page-container {
+  padding: 16px;
+  padding-bottom: 110px;
+}
+
+.section {
+  margin-bottom: 22px;
+  padding: 15px;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+}
+
+.calendar-card {
+  background: white;
+  border-radius: 18px;
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+ion-datetime {
+  width: 100%;
+  --background: white;
+  --title-color: #000;
+  --accent-color: #71d69d;
+  --wheel-highlight-background: #71d69d;
+}
+
+.times-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.time {
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #d9d9d9;
+  background: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.selected-time {
+  background: #71d69d;
+  border: none;
+  color: white;
+}
+
+.doctors {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.doctor {
+  min-width: 100px;
+  background: white;
+  padding: 10px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+
+  img {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.selected-doctor {
+  background: #71d69d;
+  color: white;
+}
+
+.summary {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+
+  h3 {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 6px 0;
+    font-size: 14px;
+  }
+}
+
+.footer-btn {
+  margin-bottom: 10px;
+
+  ion-button {
+    --background: #71d69d;
+    height: 52px;
+    font-weight: 700;
+    --border-radius: 14px;
+  }
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.empty-msg {
+  color: var(--ion-color-medium);
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+/* Slot bloqueado (el paciente ya tiene cita a esa hora) */
+.time.blocked-time {
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+  color: var(--ion-color-danger);
+  border: 1px solid rgba(var(--ion-color-danger-rgb), 0.3);
+  cursor: not-allowed;
+  opacity: 0.7;
+  position: relative;
+}
+
+.blocked-label {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* Mensaje de conflicto inline */
+.conflict-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ion-color-danger);
+  font-size: 13px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+  border-radius: 8px;
+
+  ion-icon { font-size: 18px; flex-shrink: 0; }
+}
+
+/* Resumen compacto */
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 14px 16px;
+  background: rgba(var(--ion-color-success-rgb), 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(var(--ion-color-success-rgb), 0.25);
+
+  ion-icon { font-size: 28px; flex-shrink: 0; }
+  p { margin: 2px 0; font-size: 14px; }
+}
+
+/* Main page */
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+.empty-cita {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  color: var(--ion-color-medium);
+}
+
+.empty-historial {
+  color: var(--ion-color-medium);
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.estado-badge {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+  text-transform: capitalize;
+}
+
+.btn-cancelar {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.history-info {
+  flex: 1;
+  h4 { margin: 0 0 2px; font-size: 14px; }
+  p  { margin: 0 0 2px; font-size: 13px; color: var(--ion-color-medium); }
+  small { font-size: 12px; }
+}

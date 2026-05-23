@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-   imports: [
+  imports: [
     IonIcon,IonButton, RouterModule
   ]
 })

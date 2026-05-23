@@ -14,6 +14,7 @@ export interface Paciente {
   genero: 'masculino' | 'femenino' | 'otro';
   telefono: string;
   email: string;
+  foto_url: string | null; 
 }
 
 export interface RegisterPayload {
