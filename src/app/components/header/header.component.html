@@ -7,11 +7,68 @@
     </div>
 
     <div class="notification">
-      <ion-button fill="clear">
+      <ion-button fill="clear" (click)="togglePanel()">
         <ion-icon name="notifications-outline"></ion-icon>
       </ion-button>
-      <ion-badge color="danger">1</ion-badge>
+      <ion-badge color="danger" *ngIf="notifService.noLeidas > 0">
+        {{ notifService.noLeidas }}
+      </ion-badge>
     </div>
+  </div>
+
+  <div class="greeting">
+    <h2>Hola, {{ auth.currentUser()?.nombres || 'Paciente' }}</h2>
+  </div>
+
+</div>
+
+<!-- Overlay para cerrar al tocar fuera -->
+<div class="overlay" *ngIf="showPanel" (click)="cerrarPanel()"></div>
+
+<!-- Panel de notificaciones -->
+<div class="notif-panel" [class.open]="showPanel">
+
+  <div class="panel-header">
+    <h3>Notificaciones</h3>
+    <ion-button fill="clear" size="small" (click)="cerrarPanel()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Sin notificaciones -->
+  <div class="empty-notif" *ngIf="notifService.notificaciones().length === 0">
+    <ion-icon name="notifications-outline"></ion-icon>
+    <p>Sin notificaciones</p>
+  </div>
+
+  <!-- Lista -->
+  <div class="notif-list">
+    <div
+      class="notif-item"
+      *ngFor="let notif of notificacionesVisibles"
+      [class.no-leida]="!notif.leida"
+      (click)="notifService.marcarLeida(notif.id)">
+
+      <div class="notif-icono" [style.background]="notif.color + '22'">
+        <ion-icon [name]="notif.icono" [style.color]="notif.color"></ion-icon>
+      </div>
+
+      <div class="notif-body">
+        <p class="notif-titulo">{{ notif.titulo }}</p>
+        <p class="notif-mensaje">{{ notif.mensaje }}</p>
+        <small class="notif-hora">{{ notif.fecha | date:'HH:mm' }}</small>
+      </div>
+
+      <div class="notif-dot" *ngIf="!notif.leida"></div>
+    </div>
+  </div>
+
+  <!-- Ver más -->
+  <div class="ver-mas" *ngIf="hayMas">
+    <ion-button fill="clear" expand="block" (click)="verMas()">
+      <ion-icon slot="start" name="chevron-down-outline"></ion-icon>
+      Ver más notificaciones ({{ notifService.notificaciones().length - LIMITE }})
+    </ion-button>
   </div>
 
 </div>
