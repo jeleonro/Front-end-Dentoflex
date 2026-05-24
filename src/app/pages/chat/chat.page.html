@@ -1,0 +1,109 @@
+<app-header></app-header>
+
+<ion-content class="appointment-content hide-scrollbar chat-content">
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <span class="active-tab">Activo</span>
+    <span>Mensajes</span>
+  </div>
+
+  <!-- Doctor card -->
+  <div class="doctor-card">
+
+    <div class="doctor-info">
+
+      <div class="doctor-avatar">
+        🦷
+      </div>
+
+      <div>
+        <h2>
+          Dr. {{ doctor?.nombres }}
+          {{ doctor?.apellidos }}
+        </h2>
+
+        <p>{{ doctor?.especialidad }}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Chat -->
+  <div class="chat-box">
+
+    <div
+      *ngFor="let msg of messages"
+      class="message"
+      [ngClass]="msg.tipo"
+    >
+
+      <!-- Avatar doctor -->
+      <div
+        *ngIf="msg.tipo === 'received'"
+        class="mini-avatar"
+      ></div>
+
+      <!-- Bubble -->
+      <div
+        class="bubble"
+        [ngClass]="
+          msg.tipo === 'received'
+            ? 'received-bubble'
+            : 'sent-bubble'
+        "
+      >
+
+        <small>{{ msg.hora }}</small>
+
+        <p>{{ msg.texto }}</p>
+
+      </div>
+
+      <!-- Avatar usuario -->
+      <div
+        *ngIf="msg.tipo === 'sent'"
+        class="mini-avatar user-avatar"
+      ></div>
+
+    </div>
+
+  </div>
+
+  <!-- Input -->
+  <div class="message-input-container">
+
+    <input
+      type="text"
+      placeholder="Enviar un mensaje..."
+    />
+
+    <button>
+      <ion-icon name="send"></ion-icon>
+    </button>
+
+  </div>
+
+  <!-- Reminder cards -->
+  <div class="reminders-section">
+
+    <h3>Recordatorios Programados</h3>
+
+    <div class="reminder-card">
+
+      <span>
+        {{ doctor?.especialidad }} · {{ fecha }} · {{ hora }}
+      </span>
+
+      <ion-icon
+        name="chevron-forward-outline"
+      ></ion-icon>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<app-footer></app-footer>

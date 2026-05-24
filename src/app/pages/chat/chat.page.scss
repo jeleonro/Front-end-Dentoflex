@@ -1,0 +1,245 @@
+.chat-content {
+    --background: #dff2f5;
+    font-family: "Poppins", sans-serif;
+}
+
+/* HEADER */
+
+.header-toolbar {
+    --background: #dff2f5;
+    padding-top: 10px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #111;
+        margin: 0;
+    }
+}
+
+.back-icon,
+.mail-icon {
+    font-size: 24px;
+    color: #2d2d2d;
+}
+
+/* TABS */
+
+.tabs {
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 14px 0 10px;
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom: 1px solid #e5e5e5;
+
+    span {
+        color: #666;
+    }
+
+    .active-tab {
+        color: #59b6a8;
+        position: relative;
+    }
+
+    .active-tab::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 100%;
+        height: 3px;
+        background: #59b6a8;
+        border-radius: 10px;
+    }
+}
+
+/* DOCTOR CARD */
+
+.doctor-card {
+    background: #fff;
+    padding: 16px;
+    border-bottom: 1px solid #ececec;
+}
+
+.doctor-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    h2 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        color: #1e1e1e;
+    }
+
+    p {
+        margin: 2px 0 0;
+        font-size: 14px;
+        color: #666;
+    }
+}
+
+.doctor-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #d9f5ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+/* CHAT */
+
+.chat-box {
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.received {
+    justify-content: flex-start;
+}
+
+.sent {
+    justify-content: flex-end;
+}
+
+.bubble {
+    max-width: 78%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+
+    small {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 3px;
+        color: #555;
+    }
+
+    p {
+        margin: 0;
+        font-weight: 500;
+    }
+}
+
+.received-bubble {
+    background: #dceeff;
+    border-top-left-radius: 4px;
+}
+
+.sent-bubble {
+    background: #77d8b1;
+    color: #fff;
+    border-top-right-radius: 4px;
+
+    small {
+        color: #f1f1f1;
+    }
+}
+
+.mini-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #cfcfcf;
+}
+
+.user-avatar {
+    background: #d4b08a;
+}
+
+/* INPUT */
+
+.message-input-container {
+    margin: 10px 14px 22px;
+    background: #fff;
+    border-radius: 30px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 10px 14px;
+        font-size: 14px;
+        background: transparent;
+    }
+
+    button {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        background: #59c89c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    ion-icon {
+        color: white;
+        font-size: 20px;
+    }
+}
+
+/* REMINDERS */
+
+.reminders-section {
+    padding: 0 14px 30px;
+
+    h3 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        color: #111;
+    }
+}
+
+.reminder-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    span {
+        font-size: 15px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    ion-icon {
+        font-size: 18px;
+        color: #777;
+    }
+}

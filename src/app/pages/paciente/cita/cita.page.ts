@@ -11,6 +11,7 @@ import {
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { CitaService, Dentista } from '../../../services/cita.service';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-cita',
@@ -138,7 +139,25 @@ export class CitaPage implements OnInit {
       hora: this.selectedTime,
     }).subscribe({
       next: async () => {
+
+        console.log("PROABANDO UNO DOS TRES PROBANDO");
+
         this.loadingConfirm = false;
+
+        const chatData = {
+          doctor: this.selectedDoctor,
+          fecha: this.selectedDate,
+          hora: this.selectedTime
+        };
+
+        localStorage.setItem(
+          'ultimaCita',
+          JSON.stringify(chatData)
+        );
+
+        console.log("SE GUARDO");
+        console.log(chatData);
+
         const t = await this.toast.create({
           message: '✅ ¡Cita agendada exitosamente!',
           color: 'success', duration: 2000, position: 'top',
@@ -147,7 +166,11 @@ export class CitaPage implements OnInit {
         // Volver al main; el signal ya fue actualizado en el servicio
         setTimeout(() => this.router.navigateByUrl('/main'), 1800);
       },
+
       error: async (err) => {
+          console.log("ERROR TESTEAA");
+        console.log(err);
+
         this.loadingConfirm = false;
         const msg: string = err.error?.error ?? 'Error al agendar la cita';
         // Si es conflicto de horario, mostrarlo inline también
@@ -157,6 +180,8 @@ export class CitaPage implements OnInit {
       },
     });
   }
+
+
 
   private async showToast(message: string, color: 'success' | 'danger' | 'warning') {
     const t = await this.toast.create({ message, duration: 3000, color, position: 'top' });

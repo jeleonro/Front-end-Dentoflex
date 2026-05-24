@@ -38,11 +38,7 @@
             </div>
           </div>
           <!-- Botón cancelar -->
-          <ion-button
-            fill="clear"
-            color="danger"
-            size="small"
-            class="btn-cancelar"
+          <ion-button fill="clear" color="danger" size="small" class="btn-cancelar"
             (click)="confirmarCancelacion(proximaCita)">
             <ion-icon name="close-circle-outline"></ion-icon>
           </ion-button>
@@ -85,8 +81,8 @@
     </div>
 
     <!-- ── Nueva Cita ── -->
-    <div style="padding: 0 16px 24px">
-      <ion-button expand="block" fill="outline" routerLink="/cita">
+    <div class="boton">
+      <ion-button expand="block" class="new-appointment-btn" routerLink="/cita">
         <ion-icon slot="start" name="calendar-outline"></ion-icon>
         Nueva Cita
       </ion-button>

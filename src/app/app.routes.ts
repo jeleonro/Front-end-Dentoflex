@@ -33,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'recuperar-contrasena',
     loadComponent: () => import('./pages/paciente/recuperar-contrasena/recuperar-contrasena.page').then( m => m.RecuperarContrasenaPage)
+  },  {
+    path: 'chat',
+    loadComponent: () => import('./pages/chat/chat.page').then( m => m.ChatPage)
   },
+
 
 ];

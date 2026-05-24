@@ -1,17 +1,18 @@
 ion-content {
-  --background: #dff3f8;
+  --background: #d3edf1;
 }
 
 .page-container {
-  padding: 16px;
-  padding-bottom: 110px;
+  padding: 1px 20px 75px;
 }
 
 .section {
-  margin-bottom: 22px;
-  padding: 15px;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
 
   h2 {
+    padding-left: 6px;
+    color: #093C5D;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 12px;
@@ -57,14 +58,15 @@ ion-datetime {
 
 .doctors {
   display: flex;
-  gap: 12px;
+  gap: 13px;
   overflow-x: auto;
 }
 
 .doctor {
   min-width: 100px;
   background: white;
-  padding: 10px;
+  margin: auto;
+  padding: 10px 10px 10px;
   border-radius: 16px;
   text-align: center;
   cursor: pointer;

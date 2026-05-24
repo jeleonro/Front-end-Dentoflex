@@ -1,5 +1,9 @@
+@import "@ionic/angular/css/palettes/dark.always.css";
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .header-container {
-  padding: 16px;
+  padding: 20px;
   background: #dff3f8;
 }
 
@@ -12,7 +16,7 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
 
   img {
     width: 28px;
@@ -20,9 +24,27 @@
   }
 
   span {
-    font-size: 20px;
+    justify-content: space-between;
+    font-size: 32px;
     font-weight: 700;
-    color: #1f8f72;
+  }
+
+  .dark {
+    background: linear-gradient(to right,
+        #17324d,
+        rgb(31, 122, 96));
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .green {
+    background: linear-gradient(to right,
+        #1f8f72,
+        #27c498);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -44,11 +66,13 @@
 }
 
 .greeting {
+  padding-left: 8px;
   margin-top: 12px;
 
   h2 {
+    font-family: "Montserrat", sans-serif;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 560;
     margin: 0;
   }
 }
@@ -70,7 +94,7 @@
   max-height: 70vh;
   background: #f9f9f9;
   border-radius: 0 0 0 20px;
-  box-shadow: -4px 4px 24px rgba(0,0,0,0.18);
+  box-shadow: -4px 4px 24px rgba(0, 0, 0, 0.18);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -115,8 +139,13 @@
   position: relative;
   transition: background 0.15s;
 
-  &:active { background: #f0f0f0; }
-  &.no-leida { background: #edf7f6; }
+  &:active {
+    background: #f0f0f0;
+  }
+
+  &.no-leida {
+    background: #edf7f6;
+  }
 }
 
 .notif-icono {
@@ -128,7 +157,9 @@
   justify-content: center;
   flex-shrink: 0;
 
-  ion-icon { font-size: 20px; }
+  ion-icon {
+    font-size: 20px;
+  }
 }
 
 .notif-body {
@@ -180,6 +211,12 @@
   padding: 32px 16px;
   color: #aaa;
 
-  ion-icon { font-size: 36px; }
-  p { margin: 0; font-size: 14px; }
+  ion-icon {
+    font-size: 36px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
 }

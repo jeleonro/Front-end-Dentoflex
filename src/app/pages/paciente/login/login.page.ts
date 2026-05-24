@@ -44,15 +44,37 @@ export class LoginPage {
     this.loading = true;
 
     this.auth.login(this.email, this.password).subscribe({
-      next: () => {
+
+      next: (response) => {
+
+        console.log('LOGIN OK');
+        console.log(response);
+
+        localStorage.setItem('token', response.access_token);
+
+        console.log(localStorage.getItem('token'));
+
         this.loading = false;
+
         this.router.navigateByUrl('/main');
       },
+      
       error: (err) => {
+
+        console.log('ERROR LOGIN');
+        console.log(err);
+
         this.loading = false;
+
         const msg = err.error?.error ?? 'Error al iniciar sesión';
+
         this.showToast(msg, 'danger');
       },
+
+      complete: () => {
+        console.log('COMPLETADO');
+      }
+
     });
   }
 
