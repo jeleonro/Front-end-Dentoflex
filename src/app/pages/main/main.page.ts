@@ -14,8 +14,8 @@ import {
 } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
-import { AuthService } from '../../../services/auth.service';
-import { CitaService, Cita } from '../../../services/cita.service';
+import { AuthService } from '../../services/auth.service';
+import { CitaService, Cita } from '../../services/cita.service';
 
 @Component({
   selector: 'app-main',

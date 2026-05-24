@@ -11,7 +11,7 @@ import {
   IonContent, IonLabel, IonSegment, IonButton, IonSegmentButton,
   IonInput, IonIcon, IonSelect, IonSelectOption, IonSpinner, ToastController
 } from '@ionic/angular/standalone';
-import { AuthService, RegisterPayload } from '../../../services/auth.service';
+import { AuthService, RegisterPayload } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',

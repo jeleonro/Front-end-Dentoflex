@@ -8,7 +8,7 @@ import {
   IonContent, IonButton, IonInput, IonIcon,
   IonSpinner, ToastController
 } from '@ionic/angular/standalone';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',

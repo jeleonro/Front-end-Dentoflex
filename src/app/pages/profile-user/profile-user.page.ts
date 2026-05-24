@@ -13,10 +13,10 @@ import {
   ToastController, AlertController
 } from '@ionic/angular/standalone';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
-import { AuthService, Paciente } from '../../../services/auth.service';
+import { AuthService, Paciente } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-import { CitaService } from '../../../services/cita.service';
+import { environment } from '../../../environments/environment';
+import { CitaService } from '../../services/cita.service';
 
 @Component({
   selector: 'app-profile-user',
