@@ -13,7 +13,7 @@ import {
   ToastController, AlertController
 } from '@ionic/angular/standalone';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
-import { AuthService, Paciente } from '../../services/auth.service';
+import { AuthService, Paciente, UsuarioActual } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { CitaService } from '../../services/cita.service';
@@ -61,7 +61,7 @@ export class ProfileUserPage implements OnInit {
   }
 
   private syncFields() {
-    const u = this.auth.currentUser();
+    const u = this.paciente;
     if (!u) return;
     this.telefono = u.telefono;
     this.email = u.email;
@@ -74,32 +74,28 @@ export class ProfileUserPage implements OnInit {
 
   // ── Guardar teléfono y email ──────────────
   guardarCambios() {
-    const payload: Record<string, string> = {};
+  const payload: Record<string, string> = {};
+  const current = this.paciente;
 
-    // Solo enviar si cambió algo
-    const current = this.auth.currentUser();
-    if (this.telefono && this.telefono !== current?.telefono) payload['telefono'] = this.telefono;
-    if (this.email && this.email !== current?.email) payload['email'] = this.email;
+  if (this.telefono && this.telefono !== current?.telefono) payload['telefono'] = this.telefono;
+  if (this.email    && this.email    !== current?.email)    payload['email']     = this.email;
 
-    if (Object.keys(payload).length === 0) {
+  if (Object.keys(payload).length === 0) { this.editMode = false; return; }
+
+  this.loading = true;
+  this.http.put<Paciente>(`${environment.apiUrl}/pacientes/me`, payload).subscribe({
+    next: (updated) => {
+      this.auth.currentUser.set(updated);
+      this.loading = false;
       this.editMode = false;
-      return;
-    }
-
-    this.loading = true;
-    this.http.put<Paciente>(`${environment.apiUrl}/pacientes/me`, payload).subscribe({
-      next: (updated) => {
-        this.auth.currentUser.set(updated);
-        this.loading = false;
-        this.editMode = false;
-        this.showToast('Perfil actualizado ✅', 'success');
-      },
-      error: (err) => {
-        this.loading = false;
-        this.showToast(err.error?.error ?? 'Error al actualizar', 'danger');
-      },
-    });
-  }
+      this.showToast('Perfil actualizado ✅', 'success');
+    },
+    error: (err) => {
+      this.loading = false;
+      this.showToast(err.error?.error ?? 'Error al actualizar', 'danger');
+    },
+  });
+}
 
   // ── Seleccionar y subir foto ────────────────────────────────────
   seleccionarFoto() {
@@ -185,5 +181,10 @@ export class ProfileUserPage implements OnInit {
   private async showToast(message: string, color: 'success' | 'danger' | 'warning') {
     const t = await this.toast.create({ message, duration: 2500, color, position: 'top' });
     t.present();
+  }
+
+  get paciente(): Paciente | null {
+    const u = this.auth.currentUser();
+    return u && 'telefono' in u ? (u as Paciente) : null;
   }
 }

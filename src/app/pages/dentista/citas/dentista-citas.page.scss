@@ -1,0 +1,106 @@
+@import "@ionic/angular/css/palettes/dark.always.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+.dentista-content {
+  --background: #d3edf1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dentista-header {
+  background: linear-gradient(135deg, #17324d 0%, #2a9d8f 100%);
+  padding: 48px 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 { color: #fff; font-size: 18px; font-weight: 700; margin: 0; }
+  ion-button { --color: #fff; }
+}
+
+.filtro-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  background: #fff;
+  margin: 16px 14px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+  ion-icon { font-size: 20px; color: #2a9d8f; }
+  ion-select { flex: 1; font-size: 14px; }
+}
+
+.cita-card {
+  background: #fff;
+  border-radius: 18px;
+  margin: 0 14px 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cita-fecha-hora {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  .fecha { font-size: 13px; color: #888; }
+  .hora  { font-size: 18px; font-weight: 700; color: #17324d; }
+}
+
+.paciente-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.paciente-foto {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #d3edf1;
+}
+
+.cita-card {
+  h4 { margin: 0; font-size: 15px; font-weight: 700; }
+  p  { margin: 2px 0 0; font-size: 12px; color: #888; }
+}
+
+.notas {
+  font-size: 13px;
+  color: #555;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.estado-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  align-self: flex-start;
+  text-transform: capitalize;
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 16px;
+  color: #aaa;
+
+  ion-icon { font-size: 48px; }
+  p { margin: 0; }
+}

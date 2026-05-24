@@ -1,6 +1,6 @@
 <div class="footer-nav">
   <div class="nav-item">
-    <ion-button  fill="clear" routerLink="/main" >
+    <ion-button fill="clear" routerLink="/main">
       <ion-icon name="home"></ion-icon>
     </ion-button>
   </div>
@@ -11,20 +11,23 @@
     </ion-button>
   </div>
 
-  <div class="nav-item">
-    <ion-button  fill="clear">
+  <div class="nav-item chat-btn">
+    <ion-button fill="clear" routerLink="/chat">
       <ion-icon name="chatbubble-outline"></ion-icon>
     </ion-button>
+    <ion-badge color="success" *ngIf="chatService.totalNoLeidos > 0">
+      {{ chatService.totalNoLeidos }}
+    </ion-badge>
   </div>
 
   <div class="nav-item">
-    <ion-button  fill="clear">
+    <ion-button fill="clear">
       <ion-icon name="time-outline"></ion-icon>
     </ion-button>
   </div>
 
   <div class="nav-item">
-    <ion-button  routerLink="/profile" fill="clear">
+    <ion-button routerLink="/profile" fill="clear">
       <ion-icon name="settings-outline"></ion-icon>
     </ion-button>
   </div>

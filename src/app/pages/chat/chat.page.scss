@@ -1,0 +1,199 @@
+@import "@ionic/angular/css/palettes/dark.always.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #d3edf1;
+    font-family: 'Poppins', sans-serif;
+}
+
+// ── Header ────────────────────────────────────────────
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 48px 12px 12px;
+    background: linear-gradient(135deg, #17324d 0%, #2a9d8f 100%);
+    flex-shrink: 0;
+    z-index: 10;
+
+    ion-button {
+        --color: #fff;
+    }
+}
+
+.header-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    h3 {
+        margin: 0;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    small {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+    }
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    ion-icon {
+        font-size: 24px;
+        color: #fff;
+    }
+}
+
+// ── Mensajes ──────────────────────────────────────────
+.chat-content {
+    --background: #d3edf1;
+    flex: 1;
+}
+
+.messages-container {
+    padding: 16px 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.msg-row {
+    display: flex;
+
+    &.mio {
+        justify-content: flex-end;
+    }
+
+    &.suyo {
+        justify-content: flex-start;
+    }
+}
+
+.bubble {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 18px;
+
+    p {
+        margin: 0 0 3px;
+        font-size: 14px;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    small {
+        font-size: 10px;
+        display: block;
+        text-align: right;
+    }
+
+    &.bubble-mio {
+        background: #27c498;
+        border-bottom-right-radius: 4px;
+
+        p {
+            color: #fff;
+        }
+
+        small {
+            color: rgba(255, 255, 255, 0.75);
+        }
+    }
+
+    &.bubble-suyo {
+        background: #fff;
+        border-bottom-left-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+
+        p {
+            color: #222;
+        }
+
+        small {
+            color: #aaa;
+        }
+    }
+}
+
+// ── Input ─────────────────────────────────────────────
+.chat-footer {
+    --background: transparent;
+    box-shadow: none;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.input-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 10px 14px 14px;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+}
+
+.msg-input {
+    flex: 1;
+    resize: none;
+    border: none;
+    outline: none;
+    background: #f4f4f4;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #222;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.send-btn {
+    --background: #27c498;
+    --border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+
+    ion-icon {
+        font-size: 18px;
+    }
+}
+
+// ── Estados ───────────────────────────────────────────
+.loading-center {
+    display: flex;
+    justify-content: center;
+    padding: 48px 0;
+}
+
+.empty-chat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 64px 16px;
+    color: #aaa;
+
+    ion-icon {
+        font-size: 48px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+    }
+}

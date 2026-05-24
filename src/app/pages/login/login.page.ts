@@ -36,25 +36,28 @@ export class LoginPage {
   }
 
   async onLogin() {
-    if (!this.email || !this.password) {
-      this.showToast('Completa todos los campos', 'warning');
-      return;
-    }
-
-    this.loading = true;
-
-    this.auth.login(this.email, this.password).subscribe({
-      next: () => {
-        this.loading = false;
-        this.router.navigateByUrl('/main');
-      },
-      error: (err) => {
-        this.loading = false;
-        const msg = err.error?.error ?? 'Error al iniciar sesión';
-        this.showToast(msg, 'danger');
-      },
-    });
+  if (!this.email || !this.password) {
+    this.showToast('Completa todos los campos', 'warning');
+    return;
   }
+  this.loading = true;
+
+  this.auth.login(this.email, this.password).subscribe({
+    next: (res) => {
+      this.loading = false;
+      // Redirigir según rol
+      if (res.rol === 'dentista') {
+        this.router.navigateByUrl('/dentista/home');
+      } else {
+        this.router.navigateByUrl('/main');
+      }
+    },
+    error: (err) => {
+      this.loading = false;
+      this.showToast(err.error?.error ?? 'Error al iniciar sesión', 'danger');
+    },
+  });
+}
 
   private async showToast(message: string, color: 'danger' | 'warning' | 'success') {
     const t = await this.toast.create({ message, duration: 3000, color, position: 'top' });

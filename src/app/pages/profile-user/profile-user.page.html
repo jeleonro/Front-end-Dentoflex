@@ -5,7 +5,7 @@
 
     <div class="foto-wrapper" (click)="seleccionarFoto()">
       <img
-        [src]="auth.currentUser()?.foto_url || 'assets/icon/favicon.png'"
+        [src]="paciente?.foto_url || 'assets/icon/favicon.png'"
         alt="Foto de perfil"
         class="foto-perfil">
       <div class="foto-overlay">
@@ -15,8 +15,8 @@
     </div>
 
     <div class="hero-info">
-      <h2>{{ auth.currentUser()?.nombres }} {{ auth.currentUser()?.apellidos }}</h2>
-      <p class="hero-email">{{ auth.currentUser()?.email }}</p>
+      <h2>{{ paciente?.nombres }} {{ paciente?.apellidos }}</h2>
+      <p class="hero-email">{{ paciente?.email }}</p>
     </div>
 
     <!-- Stats rápidas -->
@@ -43,8 +43,8 @@
       <div>
         <span class="dato-label">Documento</span>
         <span class="dato-valor">
-          {{ auth.currentUser()?.tipo_documento?.toUpperCase() }}
-          {{ auth.currentUser()?.numero_documento }}
+          {{ paciente?.tipo_documento?.toUpperCase() }}
+          {{ paciente?.numero_documento }}
         </span>
       </div>
     </div>
@@ -54,7 +54,7 @@
       <div>
         <span class="dato-label">Fecha de nacimiento</span>
         <span class="dato-valor">
-          {{ auth.currentUser()?.fecha_nacimiento | date:'dd/MM/yyyy' }}
+          {{ paciente?.fecha_nacimiento | date:'dd/MM/yyyy' }}
         </span>
       </div>
     </div>
@@ -64,7 +64,7 @@
       <div>
         <span class="dato-label">Género</span>
         <span class="dato-valor" style="text-transform: capitalize">
-          {{ auth.currentUser()?.genero }}
+          {{ paciente?.genero }}
         </span>
       </div>
     </div>
@@ -85,14 +85,14 @@
         <ion-icon name="call-outline"></ion-icon>
         <div>
           <span class="dato-label">Teléfono</span>
-          <span class="dato-valor">{{ auth.currentUser()?.telefono }}</span>
+          <span class="dato-valor">{{ paciente?.telefono }}</span>
         </div>
       </div>
       <div class="dato-row">
         <ion-icon name="mail-outline"></ion-icon>
         <div>
           <span class="dato-label">Correo</span>
-          <span class="dato-valor">{{ auth.currentUser()?.email }}</span>
+          <span class="dato-valor">{{ paciente?.email }}</span>
         </div>
       </div>
     </ng-container>

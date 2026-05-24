@@ -32,3 +32,18 @@
     color: #5bcf9b;
   }
 }
+
+.chat-btn {
+  position: relative;
+
+  ion-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+  }
+}

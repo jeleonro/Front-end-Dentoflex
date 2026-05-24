@@ -1,0 +1,57 @@
+<ion-content class="dentista-content">
+
+  <!-- Header -->
+  <div class="dentista-header">
+    <ion-button fill="clear" routerLink="/dentista/home">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h2>Todas mis Citas</h2>
+    <div></div>
+  </div>
+
+  <!-- Filtro -->
+  <div class="filtro-row">
+    <ion-icon name="filter-outline"></ion-icon>
+    <ion-select
+      [value]="filtro"
+      interface="popover"
+      (ionChange)="cambiarFiltro($any($event))">
+      <ion-select-option value="todas">Todas</ion-select-option>
+      <ion-select-option value="pendiente">Pendientes</ion-select-option>
+      <ion-select-option value="confirmada">Confirmadas</ion-select-option>
+      <ion-select-option value="completada">Completadas</ion-select-option>
+      <ion-select-option value="cancelada">Canceladas</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div *ngIf="loading" class="loading-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading && citasFiltradas.length === 0" class="empty-state">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <p>No hay citas con este filtro</p>
+  </div>
+
+  <div class="cita-card" *ngFor="let cita of citasFiltradas">
+    <div class="cita-fecha-hora">
+      <span class="fecha">{{ cita.fecha | date:'dd/MM/yyyy' }}</span>
+      <span class="hora">{{ cita.hora }}</span>
+    </div>
+    <div class="paciente-row">
+      <img
+        [src]="cita.pacientes?.foto_url || 'assets/icon/favicon.png'"
+        class="paciente-foto" alt="paciente">
+      <div>
+        <h4>{{ cita.pacientes?.nombres }} {{ cita.pacientes?.apellidos }}</h4>
+        <p>{{ cita.pacientes?.email }}</p>
+      </div>
+    </div>
+    <div *ngIf="cita.notas" class="notas">📝 {{ cita.notas }}</div>
+    <div class="estado-badge" [style.color]="estadoColor(cita.estado)"
+        [style.background]="estadoColor(cita.estado) + '22'">
+      {{ cita.estado | titlecase }}
+    </div>
+  </div>
+
+</ion-content>

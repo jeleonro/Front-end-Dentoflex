@@ -1,0 +1,83 @@
+<div class="chat-wrapper">
+
+  <!-- Header -->
+  <div class="chat-header">
+    <ion-button fill="clear" [routerLink]="auth.rol() === 'dentista' ? '/dentista/home' : '/main'">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+
+    <div class="header-info" *ngIf="cita; else headerGenerico">
+      <div class="avatar">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </div>
+      <div>
+        <h3 *ngIf="auth.rol() === 'paciente'">
+          {{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}
+        </h3>
+        <h3 *ngIf="auth.rol() === 'dentista'">Paciente</h3>
+        <small>{{ cita.fecha | date:'dd/MM/yyyy' }} · {{ cita.hora }}</small>
+      </div>
+    </div>
+
+    <ng-template #headerGenerico>
+      <div class="header-info">
+        <div class="avatar"><ion-icon name="person-circle-outline"></ion-icon></div>
+        <div><h3>Conversación</h3></div>
+      </div>
+    </ng-template>
+
+    <div style="width:40px"></div>
+  </div>
+
+  <!-- Mensajes -->
+  <ion-content class="chat-content" #scrollBottom>
+    <div class="messages-container">
+
+      <div *ngIf="loading" class="loading-center">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+
+      <div *ngIf="!loading && chatService.mensajes().length === 0" class="empty-chat">
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <p>Inicia la conversación</p>
+      </div>
+
+      <div
+        *ngFor="let msg of chatService.mensajes()"
+        class="msg-row"
+        [class.mio]="esMio(msg)"
+        [class.suyo]="!esMio(msg)">
+
+        <div class="bubble" [class.bubble-mio]="esMio(msg)" [class.bubble-suyo]="!esMio(msg)">
+          <p>{{ msg.contenido }}</p>
+          <small>{{ msg.created_at | date:'HH:mm' }}</small>
+        </div>
+
+      </div>
+
+    </div>
+  </ion-content>
+
+  <!-- Input -->
+  <ion-footer class="chat-footer">
+    <div class="input-row">
+      <textarea
+        class="msg-input"
+        placeholder="Escribe un mensaje..."
+        [(ngModel)]="mensaje"
+        (keydown)="onEnter($event)"
+        rows="1">
+      </textarea>
+      <ion-button
+        fill="solid"
+        shape="round"
+        class="send-btn"
+        [disabled]="!mensaje.trim() || enviando"
+        (click)="enviar()">
+        <ion-spinner *ngIf="enviando" name="crescent" style="width:18px;height:18px"></ion-spinner>
+        <ion-icon *ngIf="!enviando" name="send-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-footer>
+
+</div>

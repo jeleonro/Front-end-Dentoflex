@@ -1,0 +1,92 @@
+<ion-content class="dentista-content">
+
+  <!-- ── Header ── -->
+  <div class="dentista-header">
+    <div class="header-info">
+      <p class="header-sub">Panel del Doctor</p>
+      <h2>{{ dentista?.nombres }} {{ dentista?.apellidos }}</h2>
+      <span class="especialidad">{{ dentista?.especialidad }}</span>
+    </div>
+    <div class="header-actions">
+      <ion-button fill="clear" routerLink="/dentista/citas">
+        <ion-icon name="list-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="auth.logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- ── Stats ── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <ion-icon name="time-outline" style="color:#f4a261"></ion-icon>
+      <span class="stat-num">{{ pendientes }}</span>
+      <span class="stat-label">Pendientes</span>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="checkmark-circle-outline" style="color:#27c498"></ion-icon>
+      <span class="stat-num">{{ confirmadas }}</span>
+      <span class="stat-label">Confirmadas</span>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="calendar-outline" style="color:#17324d"></ion-icon>
+      <span class="stat-num">{{ citasHoy.length }}</span>
+      <span class="stat-label">Total hoy</span>
+    </div>
+  </div>
+
+  <!-- ── Citas de hoy ── -->
+  <div class="section-title">
+    <ion-icon name="calendar-outline"></ion-icon>
+    Citas de Hoy
+  </div>
+
+  <div *ngIf="loading" class="loading-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading && citasHoy.length === 0" class="empty-state">
+    <ion-icon name="medkit-outline"></ion-icon>
+    <p>No tienes citas para hoy</p>
+  </div>
+
+  <div class="cita-card" *ngFor="let cita of citasHoy">
+
+    <div class="cita-hora">
+      <ion-icon name="time-outline"></ion-icon>
+      {{ cita.hora }}
+    </div>
+
+    <div class="cita-info">
+      <div class="paciente-row">
+        <img [src]="cita.pacientes?.foto_url || 'assets/icon/favicon.png'" alt="paciente" class="paciente-foto">
+        <div>
+          <h4>{{ cita.pacientes?.nombres }} {{ cita.pacientes?.apellidos }}</h4>
+          <p>{{ cita.pacientes?.telefono }}</p>
+        </div>
+      </div>
+      <div *ngIf="cita.notas" class="notas">
+        📝 {{ cita.notas }}
+      </div>
+    </div>
+
+    <div class="cita-estado" [class]="'estado-' + cita.estado">
+      {{ cita.estado | titlecase }}
+    </div>
+
+    <!-- Acciones según estado -->
+    <div class="cita-actions">
+      <ion-button *ngIf="cita.estado === 'pendiente'" fill="outline" size="small" color="success"
+        (click)="confirmarCita(cita.id)">
+        Confirmar
+      </ion-button>
+      <ion-button *ngIf="cita.estado === 'confirmada'" fill="solid" size="small" color="success"
+        (click)="completarCita(cita.id)">
+        Completar
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>
