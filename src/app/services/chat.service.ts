@@ -85,7 +85,7 @@ export class ChatService {
         filter: `cita_id=eq.${citaId}`,
       },
       (payload) => {
-        console.log('🔴 Realtime recibido:', payload); // ← debug
+        
         const nuevo = payload.new as Mensaje;
         const yaExiste = this.mensajes().some(m => m.id === nuevo.id);
         if (!yaExiste) {
@@ -95,7 +95,6 @@ export class ChatService {
       }
     )
     .subscribe((status) => {
-      console.log('📡 Estado Realtime:', status); // ← debug
     });
 }
 
