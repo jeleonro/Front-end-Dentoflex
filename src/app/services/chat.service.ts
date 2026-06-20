@@ -70,6 +70,12 @@ export class ChatService {
     // Limpiar canal anterior si existe
     this.desconectar();
 
+    // Pasar el token al cliente Realtime
+    const token = this.auth.getToken();
+    if (token) {
+      this.supabase.realtime.setAuth(token);
+    }
+    
     this.channel = this.supabase
       .channel(`chat-${citaId}`)
       .on(
