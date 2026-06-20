@@ -67,36 +67,37 @@ export class ChatService {
   }
 
   private suscribirse(citaId: string) {
-    // Limpiar canal anterior si existe
-    this.desconectar();
+  this.desconectar();
 
-    // Pasar el token al cliente Realtime
-    const token = this.auth.getToken();
-    if (token) {
-      this.supabase.realtime.setAuth(token);
-    }
-    
-    this.channel = this.supabase
-      .channel(`chat-${citaId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'mensajes',
-          filter: `cita_id=eq.${citaId}`,
-        },
-        (payload) => {
-          const nuevo = payload.new as Mensaje;
-          const yaExiste = this.mensajes().some((m) => m.id === nuevo.id);
-          if (!yaExiste) {
-            this.mensajes.update((msgs) => [...msgs, nuevo]);
-            this.cargarNoLeidos(); // ← actualizar badge
-          }
-        },
-      )
-      .subscribe();
+  const token = this.auth.getToken();
+  if (token) {
+    this.supabase.realtime.setAuth(token);
   }
+
+  this.channel = this.supabase
+    .channel(`chat-${citaId}`)
+    .on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'mensajes',
+        filter: `cita_id=eq.${citaId}`,
+      },
+      (payload) => {
+        console.log('🔴 Realtime recibido:', payload); // ← debug
+        const nuevo = payload.new as Mensaje;
+        const yaExiste = this.mensajes().some(m => m.id === nuevo.id);
+        if (!yaExiste) {
+          this.mensajes.update(msgs => [...msgs, nuevo]);
+          this.cargarNoLeidos();
+        }
+      }
+    )
+    .subscribe((status) => {
+      console.log('📡 Estado Realtime:', status); // ← debug
+    });
+}
 
   enviarMensaje(citaId: string, contenido: string) {
     return this.http.post<Mensaje>(`${this.api}/chat/${citaId}`, { contenido });
