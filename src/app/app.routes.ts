@@ -10,26 +10,33 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then(m => m.LoginPage),
+    loadComponent: () =>
+      import('./pages/login/login.page').then((m) => m.LoginPage),
   },
   {
     path: 'register',
-    loadComponent: () => import('./pages/register/register.page').then(m => m.RegisterPage),
+    loadComponent: () =>
+      import('./pages/register/register.page').then((m) => m.RegisterPage),
   },
   // ruta paciente
   {
     path: 'main',
-    loadComponent: () => import('./pages/main/main.page').then(m => m.MainPage),
+    loadComponent: () =>
+      import('./pages/main/main.page').then((m) => m.MainPage),
     canActivate: [authGuard],
   },
   {
     path: 'cita',
-    loadComponent: () => import('./pages/cita/cita.page').then(m => m.CitaPage),
+    loadComponent: () =>
+      import('./pages/cita/cita.page').then((m) => m.CitaPage),
     canActivate: [authGuard],
   },
   {
     path: 'profile',
-    loadComponent: () => import('./pages/profile-user/profile-user.page').then(m => m.ProfileUserPage),
+    loadComponent: () =>
+      import('./pages/profile-user/profile-user.page').then(
+        (m) => m.ProfileUserPage,
+      ),
     canActivate: [authGuard],
   },
   // rutas dentista
@@ -39,11 +46,17 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadComponent: () => import('./pages/dentista/home/dentista-home.page').then(m => m.DentistaHomePage),
+        loadComponent: () =>
+          import('./pages/dentista/home/dentista-home.page').then(
+            (m) => m.DentistaHomePage,
+          ),
       },
       {
         path: 'citas',
-        loadComponent: () => import('./pages/dentista/citas/dentista-citas.page').then(m => m.DentistaCitasPage),
+        loadComponent: () =>
+          import('./pages/dentista/citas/dentista-citas.page').then(
+            (m) => m.DentistaCitasPage,
+          ),
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
@@ -51,21 +64,26 @@ export const routes: Routes = [
 
   {
     path: 'recuperar-contrasena',
-    loadComponent: () => import('./pages/recuperar-contrasena/recuperar-contrasena.page').then(m => m.RecuperarContrasenaPage)
+    loadComponent: () =>
+      import('./pages/recuperar-contrasena/recuperar-contrasena.page').then(
+        (m) => m.RecuperarContrasenaPage,
+      ),
   },
   {
     path: 'chat',
-    loadComponent: () => import('./pages/chat/chat.page').then(m => m.ChatPage)
-  },
-  {
-    path: 'chat',
-    loadComponent: () => import('./pages/chat/chat-list.page').then(m => m.ChatListPage),
-    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/chat/chat-list.page').then((m) => m.ChatListPage),
   },
   {
     path: 'chat/:citaId',
-    loadComponent: () => import('./pages/chat/chat.page').then(m => m.ChatPage),
+    loadComponent: () =>
+      import('./pages/chat/chat.page').then((m) => m.ChatPage),
     canActivate: [authGuard],
   },
-
+  {
+    path: 'historial',
+    loadComponent: () =>
+      import('./pages/historial/historial.page').then((m) => m.HistorialPage),
+    canActivate: [authGuard],
+  }
 ];

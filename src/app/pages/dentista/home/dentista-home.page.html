@@ -1,5 +1,4 @@
 <ion-content class="dentista-content">
-
   <!-- ── Header ── -->
   <div class="dentista-header">
     <div class="header-info">
@@ -20,17 +19,20 @@
   <!-- ── Stats ── -->
   <div class="stats-row">
     <div class="stat-card">
-      <ion-icon name="time-outline" style="color:#f4a261"></ion-icon>
+      <ion-icon name="time-outline" style="color: #f4a261"></ion-icon>
       <span class="stat-num">{{ pendientes }}</span>
       <span class="stat-label">Pendientes</span>
     </div>
     <div class="stat-card">
-      <ion-icon name="checkmark-circle-outline" style="color:#27c498"></ion-icon>
+      <ion-icon
+        name="checkmark-circle-outline"
+        style="color: #27c498"
+      ></ion-icon>
       <span class="stat-num">{{ confirmadas }}</span>
       <span class="stat-label">Confirmadas</span>
     </div>
     <div class="stat-card">
-      <ion-icon name="calendar-outline" style="color:#17324d"></ion-icon>
+      <ion-icon name="calendar-outline" style="color: #17324d"></ion-icon>
       <span class="stat-num">{{ citasHoy.length }}</span>
       <span class="stat-label">Total hoy</span>
     </div>
@@ -52,7 +54,6 @@
   </div>
 
   <div class="cita-card" *ngFor="let cita of citasHoy">
-
     <div class="cita-hora">
       <ion-icon name="time-outline"></ion-icon>
       {{ cita.hora }}
@@ -60,15 +61,17 @@
 
     <div class="cita-info">
       <div class="paciente-row">
-        <img [src]="cita.pacientes?.foto_url || 'assets/icon/favicon.png'" alt="paciente" class="paciente-foto">
+        <img
+          [src]="cita.pacientes?.foto_url || 'assets/icon/favicon.png'"
+          alt="paciente"
+          class="paciente-foto"
+        />
         <div>
           <h4>{{ cita.pacientes?.nombres }} {{ cita.pacientes?.apellidos }}</h4>
           <p>{{ cita.pacientes?.telefono }}</p>
         </div>
       </div>
-      <div *ngIf="cita.notas" class="notas">
-        📝 {{ cita.notas }}
-      </div>
+      <div *ngIf="cita.notas" class="notas">📝 {{ cita.notas }}</div>
     </div>
 
     <div class="cita-estado" [class]="'estado-' + cita.estado">
@@ -77,16 +80,28 @@
 
     <!-- Acciones según estado -->
     <div class="cita-actions">
-      <ion-button *ngIf="cita.estado === 'pendiente'" fill="outline" size="small" color="success"
-        (click)="confirmarCita(cita.id)">
+      <ion-button
+        *ngIf="cita.estado === 'pendiente'"
+        fill="outline"
+        size="small"
+        color="success"
+        (click)="confirmarCita(cita.id)"
+      >
         Confirmar
       </ion-button>
-      <ion-button *ngIf="cita.estado === 'confirmada'" fill="solid" size="small" color="success"
-        (click)="completarCita(cita.id)">
+      <ion-button
+        *ngIf="cita.estado === 'confirmada'"
+        fill="solid"
+        size="small"
+        color="success"
+        (click)="completarCita(cita.id)"
+      >
         Completar
       </ion-button>
+      <ion-button fill="clear" size="small" [routerLink]="['/chat', cita.id]">
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        Chat
+      </ion-button>
     </div>
-
   </div>
-
 </ion-content>

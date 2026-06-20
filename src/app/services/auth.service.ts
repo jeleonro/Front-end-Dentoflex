@@ -32,20 +32,6 @@ export interface RegisterPayload {
   telefono: string;
 }
 
-export interface Paciente {
-  id: string;
-  nombres: string;
-  apellidos: string;
-  fecha_nacimiento: string;
-  tipo_documento: 'dni' | 'pasaporte' | 'c.e';
-  numero_documento: string;
-  genero: 'masculino' | 'femenino' | 'otro';
-  telefono: string;
-  email: string;
-  foto_url: string | null;
-  rol: Rol;
-}
-
 export interface DentistaPerfil {
   id: string;
   nombres: string;

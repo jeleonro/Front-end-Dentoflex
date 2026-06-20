@@ -1,0 +1,106 @@
+<app-header></app-header>
+
+<ion-content class="historial-content">
+
+  <!-- Título -->
+  <div class="page-header">
+    <ion-icon name="time-outline"></ion-icon>
+    <div>
+      <h2>Historial de Citas</h2>
+      <p>Todas tus consultas odontológicas</p>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <ng-container *ngIf="!loading">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card" style="border-left: 3px solid #17324d">
+        <span class="stat-num">{{ todasLasCitas.length }}</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-card" style="border-left: 3px solid #27c498">
+        <span class="stat-num">{{ citasCompletadas }}</span>
+        <span class="stat-label">Completadas</span>
+      </div>
+      <div class="stat-card" style="border-left: 3px solid #f4a261">
+        <span class="stat-num">{{ citasActivas }}</span>
+        <span class="stat-label">Activas</span>
+      </div>
+      <div class="stat-card" style="border-left: 3px solid #e63946">
+        <span class="stat-num">{{ citasCanceladas }}</span>
+        <span class="stat-label">Canceladas</span>
+      </div>
+    </div>
+
+    <!-- Sin citas -->
+    <div *ngIf="todasLasCitas.length === 0" class="empty-state">
+      <ion-icon name="time-outline"></ion-icon>
+      <p>No tienes citas registradas aún</p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <div class="cita-item" *ngFor="let cita of todasLasCitas; let last = last">
+
+        <!-- Indicador izquierdo -->
+        <div class="cita-left">
+          <div class="estado-dot" [style.background]="estadoColor(cita.estado)">
+            <ion-icon [name]="estadoIcono(cita.estado)"></ion-icon>
+          </div>
+          <div class="cita-linea" *ngIf="!last"></div>
+        </div>
+
+        <!-- Card -->
+        <div class="cita-card">
+
+          <!-- Especialidad y estado -->
+          <div class="cita-top">
+            <div class="especialidad-row">
+              <ion-icon name="medkit-outline" [style.color]="estadoColor(cita.estado)"></ion-icon>
+              <span class="especialidad">{{ cita.dentistas?.especialidad }}</span>
+            </div>
+            <span
+              class="estado-chip"
+              [style.color]="estadoColor(cita.estado)"
+              [style.background]="estadoColor(cita.estado) + '22'">
+              {{ cita.estado | titlecase }}
+            </span>
+          </div>
+
+          <!-- Dentista -->
+          <div class="dentista-row">
+            <h4>{{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}</h4>
+          </div>
+
+          <!-- Fecha y hora -->
+          <div class="fecha-row">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ cita.fecha | date:'EEEE dd MMMM yyyy' }}</span>
+          </div>
+          <div class="fecha-row">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ cita.hora }}</span>
+          </div>
+
+          <!-- Notas -->
+          <div class="notas" *ngIf="cita.notas">
+            <ion-icon name="medkit-outline"></ion-icon>
+            {{ cita.notas }}
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </ng-container>
+
+</ion-content>
+
+<app-footer></app-footer>

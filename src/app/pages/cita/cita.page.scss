@@ -57,8 +57,9 @@ ion-datetime {
 
 .doctors {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   overflow-x: auto;
+  justify-content: center;
 }
 
 .doctor {
@@ -71,8 +72,8 @@ ion-datetime {
   border: 2px solid transparent;
 
   img {
-    width: 58px;
-    height: 58px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 8px;

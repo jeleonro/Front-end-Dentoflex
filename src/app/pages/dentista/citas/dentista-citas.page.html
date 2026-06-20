@@ -24,34 +24,87 @@
     </ion-select>
   </div>
 
+  <!-- Loading -->
   <div *ngIf="loading" class="loading-center">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
+  <!-- Empty -->
   <div *ngIf="!loading && citasFiltradas.length === 0" class="empty-state">
     <ion-icon name="calendar-outline"></ion-icon>
     <p>No hay citas con este filtro</p>
   </div>
 
+  <!-- Cards -->
   <div class="cita-card" *ngFor="let cita of citasFiltradas">
+
+    <!-- Fecha y hora -->
     <div class="cita-fecha-hora">
       <span class="fecha">{{ cita.fecha | date:'dd/MM/yyyy' }}</span>
       <span class="hora">{{ cita.hora }}</span>
+      <div
+        class="estado-badge"
+        [style.color]="estadoColor(cita.estado)"
+        [style.background]="estadoColor(cita.estado) + '22'">
+        {{ cita.estado | titlecase }}
+      </div>
     </div>
+
+    <!-- Paciente -->
     <div class="paciente-row">
       <img
         [src]="cita.pacientes?.foto_url || 'assets/icon/favicon.png'"
-        class="paciente-foto" alt="paciente">
+        class="paciente-foto"
+        alt="paciente">
       <div>
         <h4>{{ cita.pacientes?.nombres }} {{ cita.pacientes?.apellidos }}</h4>
         <p>{{ cita.pacientes?.email }}</p>
+        <small>{{ cita.pacientes?.telefono }}</small>
       </div>
     </div>
-    <div *ngIf="cita.notas" class="notas">📝 {{ cita.notas }}</div>
-    <div class="estado-badge" [style.color]="estadoColor(cita.estado)"
-        [style.background]="estadoColor(cita.estado) + '22'">
-      {{ cita.estado | titlecase }}
+
+    <!-- Notas -->
+    <div *ngIf="cita.notas" class="notas">
+      📝 {{ cita.notas }}
     </div>
+
+    <!-- Acciones -->
+    <div class="cita-actions">
+
+      <!-- Confirmar: solo si está pendiente -->
+      <ion-button
+        *ngIf="cita.estado === 'pendiente'"
+        fill="outline"
+        size="small"
+        color="success"
+        (click)="confirmarCita(cita)">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        Confirmar
+      </ion-button>
+
+      <!-- Completar: solo si está confirmada -->
+      <ion-button
+        *ngIf="cita.estado === 'confirmada'"
+        fill="solid"
+        size="small"
+        color="success"
+        (click)="completarCita(cita)">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        Completar
+      </ion-button>
+
+      <!-- Chat: siempre disponible excepto canceladas -->
+      <ion-button
+        *ngIf="cita.estado !== 'cancelada'"
+        fill="clear"
+        size="small"
+        [routerLink]="['/chat', cita.id]">
+        <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
+        Chat
+      </ion-button>
+
+    </div>
+
   </div>
 
 </ion-content>

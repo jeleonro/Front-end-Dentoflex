@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import {
   calendarOutline, checkmarkCircleOutline, timeOutline,
-  personOutline, medkitOutline, logOutOutline, listOutline
+  personOutline, medkitOutline, logOutOutline, listOutline, chatbubbleOutline
 } from 'ionicons/icons';
 import {
   IonContent, IonIcon, IonButton, IonSpinner, IonBadge,
@@ -31,7 +31,7 @@ export class DentistaHomePage implements OnInit {
     public dentistaService: DentistaService,
     private toast: ToastController,
   ) {
-    addIcons({ calendarOutline, checkmarkCircleOutline, timeOutline, personOutline, medkitOutline, logOutOutline, listOutline });
+    addIcons({ calendarOutline, checkmarkCircleOutline, timeOutline, personOutline, medkitOutline, logOutOutline, listOutline, chatbubbleOutline });
   }
 
   ngOnInit() {

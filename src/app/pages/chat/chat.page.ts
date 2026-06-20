@@ -39,21 +39,29 @@ export class ChatPage implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.citaId = this.route.snapshot.paramMap.get('citaId') ?? '';
-    if (this.citaId) {
-      this.chatService.cargarMensajes(this.citaId);
-      this.loading = false;
+  this.citaId = this.route.snapshot.paramMap.get('citaId') ?? '';
+  if (this.citaId) {
+    this.chatService.cargarMensajes(this.citaId);
+    this.chatService.cargarInfoCita(this.citaId); // cargar info para mostrar en el header
+    this.loading = false;
+  }
+}
+
+  private lastMsgCount = 0;
+
+  ngAfterViewChecked() {
+    const current = this.chatService.mensajes().length;
+    if (current !== this.lastMsgCount) {
+      this.lastMsgCount = current;
+      this.scrollToBottom();
     }
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
-
   ngOnDestroy() {
-    this.chatService.desconectar();
-    this.chatService.mensajes.set([]);
-  }
+  this.chatService.desconectar();
+  this.chatService.mensajes.set([]);
+  this.chatService.infoCita.set(null); // para evitar mostrar info de la cita anterior al entrar a otro chat
+}
 
   get cita() {
     return this.citaService.misCitas().find(c => c.id === this.citaId) ?? null;
