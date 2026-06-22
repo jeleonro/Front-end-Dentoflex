@@ -1,43 +1,50 @@
 <app-header></app-header>
 
 <ion-content class="chat-list-content">
+  <div class="page-title">
+    <ion-icon name="chatbubble-outline"></ion-icon>
+    Mensajes
+  </div>
 
-    <div class="page-title">
-        <ion-icon name="chatbubble-outline"></ion-icon>
-        Mensajes
+  <div *ngIf="loading" class="loading-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading && citasConChat.length === 0" class="empty-state">
+    <ion-icon name="chatbubble-outline"></ion-icon>
+    <p>No tienes conversaciones aún</p>
+    <small>Las conversaciones aparecen cuando tienes citas agendadas</small>
+  </div>
+
+  <div
+    class="conv-card"
+    *ngFor="let cita of citasConChat"
+    [routerLink]="['/chat', cita.id]"
+  >
+    
+
+    <div class="conv-avatar">
+      <img
+      *ngIf="auth.rol() === 'paciente' && cita.dentistas?.foto_url"
+      [src]="cita.dentistas.foto_url"
+      class="header-avatar-img"
+      alt="foto"
+    />
     </div>
 
-    <div *ngIf="loading" class="loading-center">
-        <ion-spinner name="crescent"></ion-spinner>
+    <div class="conv-info">
+      <h4>{{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}</h4>
+      <p>{{ cita.dentistas?.especialidad }}</p>
+      <small>{{ cita.fecha | date:'dd/MM/yyyy' }} · {{ cita.hora }}</small>
     </div>
 
-    <div *ngIf="!loading && citasConChat.length === 0" class="empty-state">
-        <ion-icon name="chatbubble-outline"></ion-icon>
-        <p>No tienes conversaciones aún</p>
-        <small>Las conversaciones aparecen cuando tienes citas agendadas</small>
+    <div class="conv-right">
+      <ion-badge color="success" *ngIf="noLeidosDeCita(cita.id) > 0">
+        {{ noLeidosDeCita(cita.id) }}
+      </ion-badge>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
     </div>
-
-    <div class="conv-card" *ngFor="let cita of citasConChat" [routerLink]="['/chat', cita.id]">
-
-        <div class="conv-avatar">
-            <ion-icon name="person-circle-outline"></ion-icon>
-        </div>
-
-        <div class="conv-info">
-            <h4>{{ cita.dentistas?.nombres }} {{ cita.dentistas?.apellidos }}</h4>
-            <p>{{ cita.dentistas?.especialidad }}</p>
-            <small>{{ cita.fecha | date:'dd/MM/yyyy' }} · {{ cita.hora }}</small>
-        </div>
-
-        <div class="conv-right">
-            <ion-badge color="success" *ngIf="noLeidosDeCita(cita.id) > 0">
-                {{ noLeidosDeCita(cita.id) }}
-            </ion-badge>
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-        </div>
-
-    </div>
-
+  </div>
 </ion-content>
 
 <app-footer></app-footer>

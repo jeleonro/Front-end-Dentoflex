@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
+
 .header-container {
   padding: 16px;
   background: #dff3f8;
@@ -42,6 +44,7 @@
 
   h2 {
     font-size: 20px;
+    font-family: 'red hat mono', monospace;
     font-weight: 700;
     margin-left: 10px;
     color:black;

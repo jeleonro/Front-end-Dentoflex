@@ -1,11 +1,18 @@
 @import "@ionic/angular/css/palettes/dark.always.css";
 @import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
 
 .home-content {
   --background: #d3edf1;
   padding: 18px;
   font-family: 'Poppins', sans-serif;
+}
+
+.loading-center{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
 }
 
 .header {
@@ -80,8 +87,9 @@
   right: 2px;
 }
 
-.greeting h2 {
-  font-size: 24px;
+.greeting p {
+  font-size: 15px;
+  font-family: 'red hat mono', monospace;
   font-weight: 700;
   padding-left: 16px;
   color: #222;
