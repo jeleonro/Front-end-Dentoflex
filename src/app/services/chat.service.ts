@@ -14,7 +14,6 @@ export interface Mensaje {
   created_at: string;
 }
 
-// Para mostrar info básica en la lista de chats
 export interface InfoCita {
   id: string;
   fecha: string;
@@ -39,79 +38,104 @@ export interface InfoCita {
 export class ChatService {
   private readonly api = environment.apiUrl;
 
-  mensajes = signal<Mensaje[]>([]);
-  noLeidos = signal<Record<string, number>>({});
+  mensajes  = signal<Mensaje[]>([]);
+  noLeidos  = signal<Record<string, number>>({});
+  infoCita  = signal<InfoCita | null>(null);
 
-  // Cliente Supabase solo para Realtime (no necesita service key)
   private supabase = createClient(
     environment.supabaseUrl,
     environment.supabaseAnonKey,
   );
 
   private channel: RealtimeChannel | null = null;
+  private pollingInterval: any = null;
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
   ) {}
 
-  // Cargar mensajes de una cita y suscribirse a nuevos
   cargarMensajes(citaId: string) {
-    // 1. Cargar historial
     this.http.get<Mensaje[]>(`${this.api}/chat/${citaId}`).subscribe({
       next: (msgs) => this.mensajes.set(msgs),
     });
 
-    // 2. Suscribirse a nuevos mensajes en tiempo real
     this.suscribirse(citaId);
+    this.iniciarPolling(citaId);
   }
 
   private suscribirse(citaId: string) {
-  this.desconectar();
+    this.desconectar();
 
-  const token = this.auth.getToken();
-  if (token) {
-    this.supabase.realtime.setAuth(token);
+    const token = this.auth.getToken();
+    if (token) {
+      this.supabase.realtime.setAuth(token);
+    }
+
+    setTimeout(() => {
+      this.channel = this.supabase
+        .channel(`chat-${citaId}`)
+        .on(
+          'postgres_changes',
+          {
+            event: 'INSERT',
+            schema: 'public',
+            table: 'mensajes',
+            filter: `cita_id=eq.${citaId}`,
+          },
+          (payload) => {
+            const nuevo = payload.new as Mensaje;
+            const yaExiste = this.mensajes().some(m => m.id === nuevo.id);
+            if (!yaExiste) {
+              this.mensajes.update(msgs => [...msgs, nuevo]);
+              this.cargarNoLeidos();
+            }
+          }
+        )
+        .subscribe();
+    }, 100);
   }
 
-  this.channel = this.supabase
-    .channel(`chat-${citaId}`)
-    .on(
-      'postgres_changes',
-      {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'mensajes',
-        filter: `cita_id=eq.${citaId}`,
-      },
-      (payload) => {
-        
-        const nuevo = payload.new as Mensaje;
-        const yaExiste = this.mensajes().some(m => m.id === nuevo.id);
-        if (!yaExiste) {
-          this.mensajes.update(msgs => [...msgs, nuevo]);
-          this.cargarNoLeidos();
-        }
-      }
-    )
-    .subscribe((status) => {
-    });
-}
+  // Fallback: polling cada 3 segundos
+  private iniciarPolling(citaId: string) {
+    this.detenerPolling();
+    this.pollingInterval = setInterval(() => {
+      this.http.get<Mensaje[]>(`${this.api}/chat/${citaId}`).subscribe({
+        next: (msgs) => {
+          const actuales = this.mensajes();
+          if (msgs.length !== actuales.length) {
+            this.mensajes.set(msgs);
+          }
+        },
+      });
+    }, 3000);
+  }
+
+  private detenerPolling() {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);
+      this.pollingInterval = null;
+    }
+  }
 
   enviarMensaje(citaId: string, contenido: string) {
     return this.http.post<Mensaje>(`${this.api}/chat/${citaId}`, { contenido });
   }
 
   cargarNoLeidos() {
-    this.http
-      .get<Record<string, number>>(`${this.api}/chat/no-leidos`)
-      .subscribe({
-        next: (data) => this.noLeidos.set(data),
-      });
+    this.http.get<Record<string, number>>(`${this.api}/chat/no-leidos`).subscribe({
+      next: (data) => this.noLeidos.set(data),
+    });
   }
 
   get totalNoLeidos(): number {
     return Object.values(this.noLeidos()).reduce((a, b) => a + b, 0);
+  }
+
+  cargarInfoCita(citaId: string) {
+    this.http.get<InfoCita>(`${this.api}/chat/${citaId}/info`).subscribe({
+      next: (info) => this.infoCita.set(info),
+    });
   }
 
   desconectar() {
@@ -119,14 +143,6 @@ export class ChatService {
       this.supabase.removeChannel(this.channel);
       this.channel = null;
     }
-  }
-
-  // Para mostrar info básica en la lista de chats
-  infoCita = signal<InfoCita | null>(null);
-
-  cargarInfoCita(citaId: string) {
-    this.http.get<InfoCita>(`${this.api}/chat/${citaId}/info`).subscribe({
-      next: (info) => this.infoCita.set(info),
-    });
+    this.detenerPolling();
   }
 }
